@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from './Pages/Home';
-import Other from './Pages/Other';
+import SignIn from './Pages/SignIn';
 const Tab = createBottomTabNavigator()
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Other" component={Other} />
+        <Tab.Screen name="SignIn" component={SignIn} />
       </Tab.Navigator>
     </NavigationContainer>
   );
