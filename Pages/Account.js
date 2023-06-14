@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/User";
 import { Text, View } from "react-native"
 
-const Home = () => {
+const Account = () => {
     const { user } = useContext(UserContext)
     return (
         <View>
@@ -10,4 +10,4 @@ const Home = () => {
         </View>
     )
 }
-export default Home
+export default Account

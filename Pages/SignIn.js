@@ -1,4 +1,4 @@
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, getAdditionalUserInfo } from "firebase/auth";
 import { auth, provider } from "../firebase.config";
 import { Button } from 'react-native';
 import { useContext } from "react";
@@ -8,8 +8,11 @@ export default function SignIn() {
   const { setUser } = useContext(UserContext)
 
   const handleLogIn = async () => {
-    const { _tokenResponse } = await signInWithPopup(auth, provider)
-    setUser(_tokenResponse)
+    const result = await signInWithPopup(auth, provider)
+    const userInfo = getAdditionalUserInfo(result)
+    setUser(userInfo)
+    console.log(userInfo)
+    console.log(userInfo.isNewUser)
   }
 
   return (
