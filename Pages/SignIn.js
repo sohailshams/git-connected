@@ -4,6 +4,8 @@ import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import { Button } from 'react-native';
 import myClientId from '../clientId';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
+import { UserContext } from '../contexts/User';
+import { useContext} from 'react';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -17,6 +19,8 @@ const discovery = {
 };
 
 export default function SignIn() {
+  const { user, setUser } = useContext(UserContext)
+  console.log(user)
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId: isExpoGo ? myClientId /* expo go */ : '9fc5789498d737527dd7' /* web */,
@@ -33,8 +37,8 @@ export default function SignIn() {
       const { code } = response.params;
       console.log(code)
       console.log(response.type)
+      setUser(true)
       if (response.type) {
-
       }
     }
   }, [response]);

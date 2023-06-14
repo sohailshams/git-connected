@@ -1,19 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet} from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from './Pages/Home';
-import SignIn from './Pages/SignIn';
-const Tab = createBottomTabNavigator()
+import {  UserProvider } from './contexts/User';
+import Nav from './Nav';
 
+const Tab = createBottomTabNavigator()
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="SignIn" component={SignIn} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <UserProvider>
+      <Nav/>
+    </UserProvider>
   );
 }
 
