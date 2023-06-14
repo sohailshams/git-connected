@@ -20,7 +20,6 @@ const discovery = {
 
 export default function SignIn() {
   const { user, setUser } = useContext(UserContext)
-  console.log(user)
   const [request, response, promptAsync] = useAuthRequest(
     {
       clientId: isExpoGo ? myClientId /* expo go */ : '9fc5789498d737527dd7' /* web */,
@@ -34,9 +33,6 @@ export default function SignIn() {
 
   React.useEffect(() => {
     if (response?.type === 'success') {
-      const { code } = response.params;
-      console.log(code)
-      console.log(response.type)
       setUser(true)
       if (response.type) {
       }
@@ -49,7 +45,6 @@ export default function SignIn() {
       title="Login"
       onPress={() => {
         promptAsync();
-        console.log(request)
       }}
     />
   );
