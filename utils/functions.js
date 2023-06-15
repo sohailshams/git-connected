@@ -13,6 +13,11 @@ const github = axios.create({
   baseURL: "https://api.github.com/",
 });
 
+export function getRepoList(username) {
+  github.get(`/users/${username}/repos`)
+    .then(({ data })=>data)
+}
+
 export const addUser = async (
    username,
    avatar_url,
@@ -55,3 +60,25 @@ export const getUserById = async (uid) => {
   querySnapshot.forEach(doc => docArray.push(doc.data()))
   return docArray[0]
 }
+
+export const addPortfolioRepos = async (
+  username,
+  html_url,
+  name,
+  description,
+  languages
+) => {
+
+  try {
+    const docRef = await setDoc(doc(collection(db, "repos", 'type', 'portfolio'), `${username}+${name}`), {
+      username,
+      html_url,
+      name,
+      description,
+      languages
+    });
+    console.log("document written", docRef.name);
+  } catch (e) {
+    console.log(e);
+  }
+};
