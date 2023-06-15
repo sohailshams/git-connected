@@ -5,15 +5,17 @@ import Home from "./Pages/Home";
 import SignIn from "./Pages/SignIn";
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from "@react-navigation/native";
+import Profile from "./Pages/Profile";
 const Nav = () => {
     const Tab = createBottomTabNavigator()
     const Stack = createStackNavigator()
-    const { user } = useContext(UserContext)  
+    const { isSignedIn, user: { isNewUser } } = useContext(UserContext)  
         return (
           <NavigationContainer>
-            {user ? (
-              <Tab.Navigator>
+            {isSignedIn ? (
+              <Tab.Navigator initialRouteName={isNewUser ? "Profile" : "Home"}>
                 <Tab.Screen name="Home" component={Home} />
+                <Tab.Screen name="Profile" component={Profile} />
               </Tab.Navigator>
             ) : (
               <Stack.Navigator>

@@ -1,51 +1,34 @@
-import * as React from 'react';
-import * as WebBrowser from 'expo-web-browser';
-import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
+import { signInWithPopup, getAdditionalUserInfo, onAuthStateChanged } from "firebase/auth";
+import { auth, provider } from "../firebase.config";
 import { Button } from 'react-native';
-import myClientId from '../clientId';
-import Constants, { ExecutionEnvironment } from 'expo-constants';
-import { UserContext } from '../contexts/User';
-import { useContext} from 'react';
-
-WebBrowser.maybeCompleteAuthSession();
-
-const isExpoGo = Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
-
-// Endpoint
-const discovery = {
-  authorizationEndpoint: 'https://github.com/login/oauth/authorize',
-  tokenEndpoint: 'https://github.com/login/oauth/access_token',
-  revocationEndpoint: `https://github.com/settings/connections/applications/${myClientId ? myClientId : '9fc5789498d737527dd7'}`,
-};
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
 
 export default function SignIn() {
-  const { user, setUser } = useContext(UserContext)
-  const [request, response, promptAsync] = useAuthRequest(
-    {
-      clientId: isExpoGo ? myClientId /* expo go */ : '9fc5789498d737527dd7' /* web */,
-      scopes: ['identity'],
-      redirectUri: makeRedirectUri({
-        scheme: 'exp'
-      }),
-    },
-    discovery
-  );
+  const { setUser } = useContext(UserContext)
+  const { setIsSignedIn } = useContext(UserContext)
 
-  React.useEffect(() => {
-    if (response?.type === 'success') {
-      setUser(true)
-      if (response.type) {
-      }
+  onAuthStateChanged(auth, signedInUser => {
+    if (signedInUser) {
+      setIsSignedIn(true)
+    } else {
+      setIsSignedIn(false)
     }
-  }, [response]);
+  })
+
+  const handleLogIn = async () => {
+    const result = await signInWithPopup(auth, provider)
+    const userInfo = getAdditionalUserInfo(result)
+    setUser(userInfo)
+  }
+
 
   return (
-    <Button
-      disabled={!request}
-      title="Login"
-      onPress={() => {
-        promptAsync();
-      }}
-    />
+    <>
+      <Button
+        title="Log in"
+        onPress={ handleLogIn }
+      />
+    </>
   );
 }
