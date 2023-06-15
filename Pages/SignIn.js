@@ -24,7 +24,10 @@ export default function SignIn() {
     const userInfo = getAdditionalUserInfo(result)
     setUser(userInfo)
     const { profile } = userInfo
-    addUser(profile.login, profile.avatar_url, profile.html_url, profile.name, profile.location, profile.bio, profile.email, result.user.uid)
+    console.log(userInfo.isNewUser)
+    if (userInfo.isNewUser) {
+      addUser(profile.login, profile.avatar_url, profile.html_url, profile.name, profile.location, profile.bio, profile.email, result.user.uid)
+    }
   }
 
 

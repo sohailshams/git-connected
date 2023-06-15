@@ -10,7 +10,6 @@ const Nav = () => {
     const Tab = createBottomTabNavigator()
     const Stack = createStackNavigator()
   const { user } = useContext(UserContext)
-  console.log(user)
         return (
           <NavigationContainer>
             {user ? (
