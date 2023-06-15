@@ -14,7 +14,7 @@ const github = axios.create({
 });
 
 export function getRepoList(username) {
-  github.get(`/users/${username}/repos`)
+  return github.get(`/users/${username}/repos`)
     .then(({ data })=>data)
 }
 
@@ -66,7 +66,6 @@ export const addPortfolioRepos = async (
   html_url,
   name,
   description,
-  languages
 ) => {
 
   try {
@@ -75,7 +74,6 @@ export const addPortfolioRepos = async (
       html_url,
       name,
       description,
-      languages
     });
     console.log("document written", docRef.name);
   } catch (e) {

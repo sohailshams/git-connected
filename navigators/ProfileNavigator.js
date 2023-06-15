@@ -10,8 +10,8 @@ const ProfileNavigator = () => {
    return( 
         <Stack.Navigator>
             <Stack.Screen name='own profile' component={Profile} />
-           <Stack.Screen name='add Repo' component={AddRepo} />
-           <Stack.Screen name='Repo Form' component={AddRepoForm}/>
+            <Stack.Screen name='add Repo' component={AddRepo} />
+            <Stack.Screen name='Repo Form' component={AddRepoForm}/>
         </Stack.Navigator>
    
    )
