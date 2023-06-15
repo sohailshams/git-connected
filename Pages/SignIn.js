@@ -3,6 +3,7 @@ import { auth, provider } from "../firebase.config";
 import { Button } from 'react-native';
 import { useContext } from "react";
 import { UserContext } from "../contexts/User";
+import { addUser } from "../utils/functions";
 
 export default function SignIn() {
   const { setUser } = useContext(UserContext)
@@ -20,6 +21,8 @@ export default function SignIn() {
     const result = await signInWithPopup(auth, provider)
     const userInfo = getAdditionalUserInfo(result)
     setUser(userInfo)
+    const { profile } = userInfo
+    addUser(profile.login, profile.avatar_url, profile.html_url, profile.name, profile.location, profile.bio, profile.email, result.user.uid)
   }
 
 

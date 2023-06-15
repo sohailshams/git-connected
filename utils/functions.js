@@ -1,5 +1,17 @@
-import db from '../firebase.config' 
+import axios from "axios";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../firebase.config";
 
+const github = axios.create({
+  baseURL: "https://api.github.com/",
+});
 export const addUser = async (
    username,
    avatar_url,
