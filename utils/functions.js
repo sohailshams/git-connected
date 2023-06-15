@@ -12,6 +12,7 @@ import { db } from "../firebase.config";
 const github = axios.create({
   baseURL: "https://api.github.com/",
 });
+
 export const addUser = async (
    username,
    avatar_url,
@@ -42,4 +43,5 @@ export const addUser = async (
    } catch (e) {
      console.log(e);
    }
- };
+};
+ 

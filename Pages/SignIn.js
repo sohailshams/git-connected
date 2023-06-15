@@ -3,7 +3,7 @@ import { auth, provider } from "../firebase.config";
 import { Button } from 'react-native';
 import { useContext } from "react";
 import { UserContext } from "../contexts/User";
-import { addUser } from "../utils/functions";
+import { addUser, getGithubUser } from "../utils/functions";
 
 export default function SignIn() {
   const { setUser } = useContext(UserContext)
