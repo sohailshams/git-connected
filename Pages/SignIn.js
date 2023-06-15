@@ -3,17 +3,19 @@ import { auth, provider } from "../firebase.config";
 import { Button } from 'react-native';
 import { useContext } from "react";
 import { UserContext } from "../contexts/User";
-import { addUser, getGithubUser } from "../utils/functions";
+import { addUser, getGithubUser, getUserById } from "../utils/functions";
 
 export default function SignIn() {
   const { setUser } = useContext(UserContext)
-  const { setIsSignedIn } = useContext(UserContext)
 
   onAuthStateChanged(auth, signedInUser => {
     if (signedInUser) {
-      setIsSignedIn(true)
+      const id = signedInUser.uid
+      getUserById(id)
+      .then(data=>setUser(data))
+    
     } else {
-      setIsSignedIn(false)
+      setUser(false)
     }
   })
 

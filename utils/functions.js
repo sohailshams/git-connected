@@ -6,6 +6,7 @@ import {
   getDocs,
   query,
   where,
+  getDoc
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 
@@ -45,3 +46,13 @@ export const addUser = async (
    }
 };
  
+export const getUserById = async (uid) => {
+  const q = query(
+    collection(db, "users"),
+    where("id", "==", `${uid}`)
+  );
+  const docArray = []
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => docArray.push(doc.data()))
+  return docArray[0]
+}
