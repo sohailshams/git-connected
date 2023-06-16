@@ -5,8 +5,9 @@ import Home from "../Pages/Home";
 import SignIn from "../Pages/SignIn";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Profile from "../Pages/Profile";
+import Profile from "../Pages/Profile/Profile";
 import ProfileNavigator from "./ProfileNavigator";
+import ProjectsNavigator from "./ProjectsNavigator";
 const Nav = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ const Nav = () => {
         <Tab.Navigator initialRouteName={user.isNewUser ? "Profile" : "Home"}>
           <Tab.Screen name="Home" component={Home} />
           <Tab.Screen name="Profile" component={ProfileNavigator} />
+          <Tab.Screen name='Projects' component={ProjectsNavigator}/>
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>
