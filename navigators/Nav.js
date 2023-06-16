@@ -5,7 +5,6 @@ import Home from "../Pages/Home";
 import SignIn from "../Pages/SignIn";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Profile from "../Pages/Profile/Profile";
 import ProfileNavigator from "./ProfileNavigator";
 import ProjectsNavigator from "./ProjectsNavigator";
 const Nav = () => {

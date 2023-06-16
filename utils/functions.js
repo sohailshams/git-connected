@@ -6,6 +6,7 @@ import {
   getDocs,
   query,
   where,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 
@@ -131,3 +132,13 @@ export const getProjectById = async (id) => {
   querySnapshot.forEach((doc) => docArray.push(doc.data()));
   return docArray;
 };
+
+export const editProfile = async(username, bio, email, location, name) => {
+  const docRef = doc(db, 'users', `${username}`)
+  await updateDoc(docRef, {
+    bio,
+    email,
+    location,
+    name
+  })
+}

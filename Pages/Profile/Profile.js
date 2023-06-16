@@ -5,7 +5,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import FormButtons from "../../components/ProfilePage/FormButtons";
 import ProfileData from "../../components/ProfilePage/ProfileData";
-import { getPortfolioById, getProjectById } from "../../utils/functions";
+import { getPortfolioById, getProjectById, getUserById } from "../../utils/functions";
 import MiniRepoList from "../../components/MiniLists/MiniRepoList";
 import MiniColabList from "../../components/MiniLists/MiniColabList";
 
@@ -17,13 +17,15 @@ const Profile = ({ navigation }) => {
   const [portfolio, setPortfolio] = useState([])
   const [colab, setColab] = useState([])
   const [state, setState] = useState(1);
+  const [data, setData] = useState('')
+  useEffect(() => { getUserById(user.id).then(data=> setData(data)) }, [state])
   useEffect(() => { getPortfolioById(user.id).then(data => setPortfolio(data)) }, [state])
   useEffect(() => {
     getProjectById(user.id).then((data) => setColab(data));
-  }, []);
+  }, [state]);
   return (
     <View>
-      <ProfileData user={user} />
+      <ProfileData user={data} />
       <Button
         title="add repo"
         onPress={() => navigation.navigate("add Repo")}
@@ -36,6 +38,7 @@ const Profile = ({ navigation }) => {
       />
       {state === 1 ? <MiniRepoList portfolio={portfolio} navigation={navigation}/> : <MiniColabList project={colab} navigation={navigation}/>}
       <Button title="Sign out" onPress={handleSignOut} />
+      <Button title='edit' onPress={()=>navigation.navigate('Edit', {data})}/>
     </View>
   );
 };
