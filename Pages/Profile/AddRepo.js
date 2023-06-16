@@ -1,12 +1,15 @@
 import { View, Text, FlatList } from "react-native";
 import { getRepoList } from "../../utils/functions";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RepoListCard from "../../components/RepoListCard";
+import { UserContext } from "../../contexts/User";
 
 const AddRepo = ({ navigation }) => {
+  const {user} = useContext(UserContext)
   const [repos, setRepos] = useState("");
+  console.log(user)
   useEffect(() => {
-    getRepoList("masonward99").then((data) => setRepos(data));
+    getRepoList(user.username).then((data) => setRepos(data));
   }, []);
 
   const renderItem = ({ item }) => {
