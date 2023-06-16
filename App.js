@@ -1,27 +1,18 @@
-import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { UserProvider } from "./contexts/User";
-import Nav from "./navigators/Nav";
-import { SafeAreaView, View } from "react-native";
+import Nav from "./Nav";
+import { NativeWindStyleSheet } from "nativewind";
+    
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 const Tab = createBottomTabNavigator();
 export default function App() {
   return (
-        <UserProvider>
-        <Nav />
-      </UserProvider>
-    
-      
-    
-    
+    <UserProvider>
+      <Nav />
+    </UserProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

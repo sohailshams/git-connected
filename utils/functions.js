@@ -44,7 +44,6 @@ export const addUser = async (
        email: newEmail,
        id,
      });
-     console.log("document written", docRef.id);
    } catch (e) {
      console.log(e);
    }
