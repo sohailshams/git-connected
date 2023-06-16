@@ -6,6 +6,8 @@ import { auth } from "../../firebase.config";
 import FormButtons from "../../components/FormButtons";
 import RepoCard from "../../components/RepoCard";
 
+
+
 const Profile = ({ navigation }) => {
   const handleSignOut = () => {
     signOut(auth);
