@@ -6,7 +6,7 @@ const RepoCard = ({data, navigation}) => {
     }
     return (
         <View>
-            <Button title="navigation" onPress={handlePress}/>
+            <Button title="placeholder for list item" onPress={handlePress}/>
         </View>
     )
 }

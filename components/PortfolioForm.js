@@ -8,7 +8,6 @@ const PortfolioForm = ({data, navigation}) => {
         addPortfolioRepos(data.owner.login, data.html_url, data.name, text)
         navigation.navigate('own profile')
     }
-    console.log(text)
     return (
         <View onSubmit>
             <Text>description</Text>

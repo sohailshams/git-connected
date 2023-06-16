@@ -5,6 +5,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import FormButtons from "../../components/FormButtons";
 import RepoCard from "../../components/RepoCard";
+import ProfileData from "../../components/ProfileData";
 
 
 
@@ -16,17 +17,14 @@ const Profile = ({ navigation }) => {
   const [state, setState] = useState(1)
   return (
     <View>
-      <Text>{user.username}</Text>
-      <Image source={user.avatar_url} style={{ height: 200, width: 200 }} />
-      <Text>{user.bio}</Text>
-      <Text>{user.location}</Text>
+      <ProfileData user={user}/>
       <Button
         title="add repo"
         onPress={() => navigation.navigate("add Repo")}
       />
       <FormButtons
-        title1="portfolio"
-        title2="collaboration"
+        title1="Showcase list"
+        title2="collaboration list"
         state={state}
         setState={setState}
       />

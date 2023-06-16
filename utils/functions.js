@@ -65,6 +65,7 @@ export const addPortfolioRepos = async (
   html_url,
   name,
   description,
+  userId
 ) => {
 
   try {
@@ -74,6 +75,34 @@ export const addPortfolioRepos = async (
       name,
       description,
     });
+    console.log("document written", docRef.name);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+
+export const addProjectRepos = async (
+  username,
+  html_url,
+  name,
+  description,
+  theme,
+  languagesWanted,
+  userId
+) => {
+  try {
+    const docRef = await setDoc(
+      doc(collection(db, "repos", "type", "collaboration"), `${username}+${name}`),
+      {
+        username,
+        html_url,
+        name,
+        description,
+        theme,
+        languagesWanted
+      }
+    );
     console.log("document written", docRef.name);
   } catch (e) {
     console.log(e);
