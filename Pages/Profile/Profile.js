@@ -4,7 +4,7 @@ import { Text, View, Button, Image } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import FormButtons from "../../components/FormButtons";
-import RepoCard from "../../components/repoCard";
+import RepoCard from "../../components/RepoCard";
 
 const Profile = ({ navigation }) => {
   const handleSignOut = () => {
