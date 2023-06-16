@@ -9,11 +9,11 @@ import Profile from "./Pages/Profile";
 const Nav = () => {
     const Tab = createBottomTabNavigator()
     const Stack = createStackNavigator()
-    const { isSignedIn, user: { isNewUser } } = useContext(UserContext)  
+  const { user } = useContext(UserContext)
         return (
           <NavigationContainer>
-            {isSignedIn ? (
-              <Tab.Navigator initialRouteName={isNewUser ? "Profile" : "Home"}>
+            {user ? (
+              <Tab.Navigator initialRouteName={user.isNewUser ? "Profile" : "Home"}>
                 <Tab.Screen name="Home" component={Home} />
                 <Tab.Screen name="Profile" component={Profile} />
               </Tab.Navigator>

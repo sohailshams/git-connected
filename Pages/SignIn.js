@@ -3,16 +3,19 @@ import { auth, provider } from "../firebase.config";
 import { Button } from 'react-native';
 import { useContext } from "react";
 import { UserContext } from "../contexts/User";
+import { addUser, getGithubUser, getUserById } from "../utils/functions";
 
 export default function SignIn() {
   const { setUser } = useContext(UserContext)
-  const { setIsSignedIn } = useContext(UserContext)
 
   onAuthStateChanged(auth, signedInUser => {
     if (signedInUser) {
-      setIsSignedIn(true)
+      const id = signedInUser.uid
+      getUserById(id)
+      .then(data=>setUser(data))
+    
     } else {
-      setIsSignedIn(false)
+      setUser(false)
     }
   })
 
@@ -20,6 +23,10 @@ export default function SignIn() {
     const result = await signInWithPopup(auth, provider)
     const userInfo = getAdditionalUserInfo(result)
     setUser(userInfo)
+    const { profile } = userInfo
+    if (userInfo.isNewUser) {
+      addUser(profile.login, profile.avatar_url, profile.html_url, profile.name, profile.location, profile.bio, profile.email, result.user.uid)
+    }
   }
 
 
