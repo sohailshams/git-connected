@@ -1,13 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import ProjectList from "../Pages/Projects/ProjectList";
+import DevList from "../Pages/DevList/DevList";
 import Home from "../Pages/Home";
 
-const ProjectsNavigator = () => {
+const DevNavigator = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Project list" component={ProjectList} />
+      <Stack.Screen name="Dev List" component={DevList} />
     </Stack.Navigator>
   );
 };
-export default ProjectsNavigator;
+export default DevNavigator;
