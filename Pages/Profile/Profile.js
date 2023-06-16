@@ -4,7 +4,6 @@ import { Text, View, Button, Image } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import FormButtons from "../../components/ProfilePage/FormButtons";
-import RepoCard from "../../components/RepoCard";
 import ProfileData from "../../components/ProfilePage/ProfileData";
 import { getPortfolioById, getProjectById } from "../../utils/functions";
 import MiniRepoList from "../../components/MiniLists/MiniRepoList";
