@@ -82,9 +82,9 @@ export const getDevList = async () => {
   const collectionRef = collection(db, "users");
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
-
+  const devList = [];
   querySnapshot.forEach((doc) => {
-    console.log(Array.isArray(doc));
-    console.log(doc.data());
+    devList.push(doc.data());
   });
+  return devList;
 };

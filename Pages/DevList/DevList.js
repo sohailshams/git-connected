@@ -1,13 +1,27 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { View, Text, FlatList, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
 import { getDevList } from "../../utils/functions";
+import DevCard from "./DevCard";
 
 const DevList = () => {
-  getDevList();
+  const [devArray, setDevArray] = useState([]);
+  useEffect(() => {
+    const getDevArray = async () => {
+      const fetchedDevArray = await getDevList();
+      setDevArray(fetchedDevArray);
+    };
+    getDevArray();
+  }, []);
+
+  const renderItem = (item) => {
+    return <DevCard data={item} />;
+  };
   return (
-    <View>
-      <Text>DevList</Text>
-    </View>
+    <ScrollView>
+      <View>
+        <FlatList data={devArray} renderItem={renderItem} />
+      </View>
+    </ScrollView>
   );
 };
 
