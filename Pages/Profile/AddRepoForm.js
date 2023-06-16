@@ -1,8 +1,8 @@
 import { View, Text } from "react-native";
-import FormButtons from "../../components/FormButtons";
+import FormButtons from "../../components/ProfilePage/FormButtons";
 import { useState } from "react";
-import PortfolioForm from "../../components/PortfolioForm";
-import ProjectForm from "../../components/ProjectForm";
+import PortfolioForm from "../../components/ProfileForms/PortfolioForm";
+import ProjectForm from "../../components/ProfileForms/ProjectForm";
 
 const AddRepoForm = ({ navigation, route }) => {
   const { data } = route.params;
@@ -18,7 +18,9 @@ const AddRepoForm = ({ navigation, route }) => {
       />
       {state === 1 ? (
         <PortfolioForm data={data} navigation={navigation} />
-      ) : <ProjectForm data={data} navigation={navigation}/>}
+      ) : (
+        <ProjectForm data={data} navigation={navigation} />
+      )}
     </View>
   );
 };

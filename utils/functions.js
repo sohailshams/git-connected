@@ -74,6 +74,7 @@ export const addPortfolioRepos = async (
       html_url,
       name,
       description,
+      userId
     });
     console.log("document written", docRef.name);
   } catch (e) {
@@ -100,11 +101,33 @@ export const addProjectRepos = async (
         name,
         description,
         theme,
-        languagesWanted
+        languagesWanted,
+        userId
       }
     );
     console.log("document written", docRef.name);
   } catch (e) {
     console.log(e);
   }
+};
+
+export const getPortfolioById = async (id ) => {
+  const q = query(
+    collection(db, "repos", 'type', 'portfolio'),
+    where("userId", "==", `${id}`)
+  );
+  const docArray = []
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => docArray.push(doc.data()))
+  return docArray
+}
+export const getProjectById = async (id) => {
+  const q = query(
+    collection(db, "repos", "type", "collaboration"),
+    where("userId", "==", `${id}`)
+  );
+  const docArray = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => docArray.push(doc.data()));
+  return docArray;
 };
