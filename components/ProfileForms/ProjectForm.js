@@ -8,6 +8,7 @@ const ProjectForm = ({ data, navigation }) => {
   const [description, onChangeDescription] = useState(data.description);
   const [theme, setTheme] = useState("");
   const [lang, setLang] = useState("");
+  const [state, setState] = useState(false);
   const handleSubmit = (event) => {
     if (description !== null && theme !== "" && lang !== "" && description !== '') {
       addProjectRepos(
@@ -20,6 +21,8 @@ const ProjectForm = ({ data, navigation }) => {
         user.id
       );
       navigation.navigate("own profile");
+    } else {
+      setState(true)
     }
   };
   return (
@@ -42,6 +45,7 @@ const ProjectForm = ({ data, navigation }) => {
         onChangeText={setLang}
         value={lang}
       />
+      {state ? <Text>Fill in all fields</Text> : null}
       <Button title="add repo" onPress={handleSubmit} />
     </View>
   );
