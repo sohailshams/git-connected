@@ -16,7 +16,7 @@ const AddRepo = ({ navigation, route }) => {
   };
   return (
     <View>
-      <Text>Repo list will go here</Text>
+      <Text>Select a repo:</Text>
       <FlatList
         data={repos}
         renderItem={renderItem}
