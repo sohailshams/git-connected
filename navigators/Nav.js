@@ -20,9 +20,11 @@ const Nav = () => {
           screenOptions={{ headerTitleAlign: "center" }}
           initialRouteName={user.isNewUser ? "Profile" : "Home"}
         >
+
           <Tab.Screen name="Projects" component={ProjectsNavigator} />
           <Tab.Screen name="Devs" component={DevProfileNavigator} />
           <Tab.Screen name='account' component={ProfileNavigator}/>
+
         </Tab.Navigator>
       ) : (
         <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
