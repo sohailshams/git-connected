@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { getUserById } from "../../utils/functions";
 import { View, Text } from "react-native";
 import ProfileData from "../../components/ProfilePage/ProfileData";
-import FormButtons from "../../components/FormButtons 2";
+import FormButtons from "../../components/ProfilePage/FormButtons";
 import { getPortfolioById, getProjectById } from "../../utils/functions";
 import MiniColabList from "../../components/MiniLists/MiniColabList";
 import MiniRepoList from "../../components/MiniLists/MiniRepoList";
