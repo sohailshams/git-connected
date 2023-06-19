@@ -10,7 +10,7 @@ const EditProfile = ({ navigation, route }) => {
     const [location, setLocation] = useState(data.location)
     
     const handlePress = () => {
-        navigation.navigate('own profile')
+        navigation.navigate('My Profile')
         editProfile(data.username, bio, email, location, name)
             .then(setCount(count + 1))
     }

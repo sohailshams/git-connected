@@ -11,7 +11,7 @@ const ProjectForm = ({ data, navigation, count, setCount }) => {
   const [state, setState] = useState(false);
   const handleSubmit = (event) => {
     if (description !== null && theme !== "" && lang !== "" && description !== '') {
-      navigation.navigate("own profile");
+      navigation.navigate("My Profile");
       addProjectRepos(
         data.owner.login,
         data.html_url,

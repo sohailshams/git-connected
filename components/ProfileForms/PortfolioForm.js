@@ -12,7 +12,7 @@ const PortfolioForm = ({ data, navigation, count, setCount }) => {
   const [state, setState] = useState(false)
   const handleSubmit = (event) => {
     if (text !== null && text !== '') {
-      navigation.navigate("own profile")
+      navigation.navigate("My Profile")
       addPortfolioRepos(data.owner.login, data.html_url, data.name, text, user.id)
       .then(setCount(count +1))
     } else {
