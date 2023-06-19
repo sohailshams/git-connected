@@ -4,15 +4,18 @@ import { Text, View, TextInput, Button } from "react-native";
 import { editProfile } from "../../utils/functions";
 
 const EditProfile = ({ navigation, route }) => {
-    const {data} =route.params
+    const {data,count, setCount} =route.params
     const [name, setName] = useState(data.name)
     const [bio, setBio] = useState(data.bio)
     const [email, setEmail] = useState(data.email)
     const [location, setLocation] = useState(data.location)
+    console.log(count)
     
     const handlePress = () => {
         navigation.navigate('own profile')
         editProfile(data.username, bio, email, location, name)
+            .then(setCount(count + 1))
+        console.log(count)
     }
     return (
         <View>

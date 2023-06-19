@@ -4,7 +4,7 @@ import { useState } from "react";
 import PortfolioForm from "../../components/ProfileForms/PortfolioForm";
 import ProjectForm from "../../components/ProfileForms/ProjectForm";
 
-const AddRepoForm = ({ navigation, route }) => {
+const AddRepoForm = ({ navigation, route, count, setCount }) => {
   const { data } = route.params;
   const [state, setState] = useState(1);
   return (
@@ -17,9 +17,9 @@ const AddRepoForm = ({ navigation, route }) => {
         setState={setState}
       />
       {state === 1 ? (
-        <PortfolioForm data={data} navigation={navigation} />
+        <PortfolioForm data={data} navigation={navigation} count={count} setCount={setCount} />
       ) : (
-        <ProjectForm data={data} navigation={navigation} />
+        <ProjectForm data={data} navigation={navigation} count={count} setCount={setCount} />
       )}
     </View>
   );
