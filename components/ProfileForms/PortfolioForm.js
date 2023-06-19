@@ -1,14 +1,20 @@
 import { TextInput, Text, View, Button } from "react-native";
-import { addPortfolioRepos } from "../utils/functions";
-import { useState } from "react";
+import { addPortfolioRepos } from "../../utils/functions";
+import { useContext, useState } from "react";
+import { UserContext } from "../../contexts/User";
 
 const PortfolioForm = ({ data, navigation }) => {
+  const { user } = useContext(UserContext)
   const [text, onChangeText] = useState(data.description);
+  const [state, setState] = useState(false)
   const handleSubmit = (event) => {
-    addPortfolioRepos(data.owner.login, data.html_url, data.name, text);
-    navigation.navigate("own profile");
+    if (text !== null && text !== '') {
+      addPortfolioRepos(data.owner.login, data.html_url, data.name, text, user.id);
+      navigation.navigate("own profile");
+    } else {
+      setState(true)
+    }
   };
-  console.log(text);
   return (
     <View onSubmit>
       <Text>description</Text>
@@ -17,6 +23,7 @@ const PortfolioForm = ({ data, navigation }) => {
         onChangeText={onChangeText}
         value={text}
       />
+      {state? <Text>Fill in all fields</Text>: null}
       <Button title="add repo" onPress={handleSubmit} />
     </View>
   );
