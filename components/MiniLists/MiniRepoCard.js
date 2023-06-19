@@ -1,4 +1,4 @@
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, Linking } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
 const MiniRepoCard = ({ data, navigation }) => {

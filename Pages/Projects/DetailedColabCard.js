@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Linking } from 'react-native';
 import React from 'react';
 
 const DetailedColabCard = ({ route }) => {
