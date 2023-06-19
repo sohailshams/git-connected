@@ -6,7 +6,7 @@ const ProjectsNavigator = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Project list" component={ProjectList} />
+      <Stack.Screen name="Browse Projects" component={ProjectList} />
     </Stack.Navigator>
   );
 };
