@@ -4,6 +4,9 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/User";
 
 const PortfolioForm = ({ data, navigation }) => {
+  if (data.description === null) {
+    data.description = ''
+  }
   const { user } = useContext(UserContext)
   const [text, onChangeText] = useState(data.description);
   const [state, setState] = useState(false)
