@@ -10,11 +10,9 @@ import React from "react";
 import DevProfile from "../DevProfile/DevProfile";
 
 const DevCard = ({ data, navigation }) => {
-  function handlePress() {
-    navigation.navigate('dev profile')
-  }
+
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <TouchableOpacity onPress={() => navigation.navigate('dev profile', { data })}>
       <View className="flex flex-row border-[1px] border-black m-2 p-5 items-center">
         <Image
           className="h-[80px] w-[80px] rounded-full"

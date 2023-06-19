@@ -15,9 +15,9 @@ const Profile = ({ navigation }) => {
   };
   const { user } = useContext(UserContext);
   const [portfolio, setPortfolio] = useState([])
+  const [data, setData] = useState('')
   const [colab, setColab] = useState([])
   const [state, setState] = useState(1);
-  const [data, setData] = useState('')
   useEffect(() => { getUserById(user.id).then(data=> setData(data)) }, [state])
   useEffect(() => { getPortfolioById(user.id).then(data => setPortfolio(data)) }, [state])
   useEffect(() => {
