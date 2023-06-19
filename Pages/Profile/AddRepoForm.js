@@ -4,8 +4,9 @@ import { useState } from "react";
 import PortfolioForm from "../../components/ProfileForms/PortfolioForm";
 import ProjectForm from "../../components/ProfileForms/ProjectForm";
 
-const AddRepoForm = ({ navigation, route, count, setCount }) => {
-  const { data } = route.params;
+const AddRepoForm = ({ navigation, route }) => {
+  const { data, count, setCount } = route.params;
+  console.log(count)
   const [state, setState] = useState(1);
   return (
     <View>

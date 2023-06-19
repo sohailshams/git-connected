@@ -20,10 +20,10 @@ const Profile = ({ navigation }) => {
   const [state, setState] = useState(1);
   const [data, setData] = useState('')
   useEffect(() => { getUserById(user.id).then(data=> setData(data)) }, [count])
-  useEffect(() => { getPortfolioById(user.id).then(data => setPortfolio(data)) }, [state])
+  useEffect(() => { getPortfolioById(user.id).then(data => setPortfolio(data)) }, [count])
   useEffect(() => {
     getProjectById(user.id).then((data) => setColab(data));
-  }, [state]);
+  }, [count]);
   return (
     <View>
       <ProfileData user={data} />

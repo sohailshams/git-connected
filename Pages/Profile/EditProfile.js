@@ -1,5 +1,4 @@
-import { useContext, useState } from "react"
-import { UserContext } from "../../contexts/User"
+import {  useState } from "react"
 import { Text, View, TextInput, Button } from "react-native";
 import { editProfile } from "../../utils/functions";
 
@@ -9,13 +8,11 @@ const EditProfile = ({ navigation, route }) => {
     const [bio, setBio] = useState(data.bio)
     const [email, setEmail] = useState(data.email)
     const [location, setLocation] = useState(data.location)
-    console.log(count)
     
     const handlePress = () => {
         navigation.navigate('own profile')
         editProfile(data.username, bio, email, location, name)
             .then(setCount(count + 1))
-        console.log(count)
     }
     return (
         <View>
