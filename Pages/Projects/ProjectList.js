@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../../firebase.config';
 import ColabCard from './ColabCard';
 
-const ProjectList = () => {
+const ProjectList = ({ navigation }) => {
   const [projectList, setProjectList] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const ProjectList = () => {
   }, []);
 
   const renderProjectItem = (item) => {
-    return <ColabCard data={item} />;
+    return <ColabCard data={item} navigation={navigation}/>;
   };
 
   return (
