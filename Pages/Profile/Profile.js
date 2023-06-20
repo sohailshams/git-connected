@@ -44,11 +44,9 @@ const Profile = ({ navigation }) => {
   }, [count]);
 
   const [lang, setLang] = useState([]);
-  console.log(lang);
   useEffect(() => {
     const getLangArray = async () => {
       const fetchedLangArray = await getDevLanguages(user.username);
-      console.log("user:", user, "fetchedLangArray:", fetchedLangArray);
       setLang(fetchedLangArray);
     };
     getLangArray();
@@ -132,8 +130,8 @@ const Profile = ({ navigation }) => {
       </View>
       <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
         <FormButtons
-          title1="Showcase list"
-          title2="collaboration list"
+          title1="Showcase List"
+          title2="Collaboration List"
           state={state}
           setState={setState}
         />
