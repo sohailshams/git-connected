@@ -5,7 +5,11 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import FormButtons from "../../components/ProfilePage/FormButtons";
 import ProfileData from "../../components/ProfilePage/ProfileData";
-import { getPortfolioById, getProjectById, getUserById } from "../../utils/functions";
+import {
+  getPortfolioById,
+  getProjectById,
+  getUserById,
+} from "../../utils/functions";
 import MiniRepoList from "../../components/MiniLists/MiniRepoList";
 import MiniColabList from "../../components/MiniLists/MiniColabList";
 
@@ -13,24 +17,28 @@ const Profile = ({ navigation }) => {
   const handleSignOut = () => {
     signOut(auth);
   };
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
   const { user } = useContext(UserContext);
-  const [portfolio, setPortfolio] = useState([])
-  const [data, setData] = useState('')
-  const [colab, setColab] = useState([])
+  const [portfolio, setPortfolio] = useState([]);
+  const [data, setData] = useState("");
+  const [colab, setColab] = useState([]);
   const [state, setState] = useState(1);
 
-  useEffect(() => { getUserById(user.id).then(data=> setData(data)) }, [count])
-  useEffect(() => { getPortfolioById(user.id).then(data => setPortfolio(data)) }, [count])
+  useEffect(() => {
+    getUserById(user.id).then((data) => setData(data));
+  }, [count]);
+  useEffect(() => {
+    getPortfolioById(user.id).then((data) => setPortfolio(data));
+  }, [count]);
   useEffect(() => {
     getProjectById(user.id).then((data) => setColab(data));
   }, [count]);
   return (
-    <View>
+    <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
       <ProfileData user={data} />
       <Button
         title="add repo"
-        onPress={() => navigation.navigate("add Repo", {count, setCount})}
+        onPress={() => navigation.navigate("add Repo", { count, setCount })}
       />
       <FormButtons
         title1="Showcase list"
@@ -38,9 +46,16 @@ const Profile = ({ navigation }) => {
         state={state}
         setState={setState}
       />
-      {state === 1 ? <MiniRepoList portfolio={portfolio} navigation={navigation}/> : <MiniColabList project={colab} navigation={navigation}/>}
+      {state === 1 ? (
+        <MiniRepoList portfolio={portfolio} navigation={navigation} />
+      ) : (
+        <MiniColabList project={colab} navigation={navigation} />
+      )}
       <Button title="Sign out" onPress={handleSignOut} />
-      <Button title='edit' onPress={()=>navigation.navigate('Edit', {data, count, setCount})}/>
+      <Button
+        title="edit"
+        onPress={() => navigation.navigate("Edit", { data, count, setCount })}
+      />
     </View>
   );
 };
