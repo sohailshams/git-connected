@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getDevList } from "../../utils/functions";
 import DevCard from "./DevCard";
 
-const DevList = () => {
+const DevList = ({navigation}) => {
   const [devArray, setDevArray] = useState([]);
   useEffect(() => {
     const getDevArray = async () => {
@@ -14,7 +14,7 @@ const DevList = () => {
   }, []);
 
   const renderItem = (item) => {
-    return <DevCard data={item} />;
+    return <DevCard data={item} navigation={navigation} />;
   };
   return (
     <ScrollView>

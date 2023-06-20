@@ -2,14 +2,13 @@ import { Text, View, Button} from "react-native"
 import { TouchableOpacity } from "react-native"
 
 
-const RepoListCard = ({data, navigation}) => {
-
+const RepoListCard = ({ data, navigation, count, setCount}) => {
     function handlePress() {
-        navigation.navigate('Repo Form', {data})
+        navigation.navigate('Repo Form', { data, count, setCount })
     }
     return (
-    <TouchableOpacity onPress={()=>handlePress}>
-            <Button title={data.name} onPress={handlePress } />
+    <TouchableOpacity onPress={handlePress}>
+            <Text>{data.name}</Text>
     </TouchableOpacity>
     )
 }

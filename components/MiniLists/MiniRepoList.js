@@ -7,7 +7,7 @@ const MiniRepoList = ({portfolio, navigation}) => {
   };
     return (        
         <View>
-            <Text>Showcase repos</Text>
+            <Text >Showcase repos</Text>
             <FlatList data={ portfolio} renderItem={renderItem} />
         </View>
 )
