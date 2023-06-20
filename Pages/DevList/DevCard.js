@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { getDevLanguages, makeUniqueArray } from "../../utils/functions";
 import DevProfile from "../DevProfile/DevProfile";
 
-const DevCard = ({ data }) => {
+const DevCard = ({ data, navigation }) => {
   const [lang, setLang] = useState([]);
 
   useEffect(() => {
