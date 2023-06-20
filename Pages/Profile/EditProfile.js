@@ -1,18 +1,18 @@
-import { useContext, useState } from "react"
-import { UserContext } from "../../contexts/User"
+import {  useState } from "react"
 import { Text, View, TextInput, Button } from "react-native";
 import { editProfile } from "../../utils/functions";
 
 const EditProfile = ({ navigation, route }) => {
-    const {data} =route.params
+    const {data,count, setCount} =route.params
     const [name, setName] = useState(data.name)
     const [bio, setBio] = useState(data.bio)
     const [email, setEmail] = useState(data.email)
     const [location, setLocation] = useState(data.location)
     
     const handlePress = () => {
-        navigation.navigate('own profile')
+        navigation.navigate('My Profile')
         editProfile(data.username, bio, email, location, name)
+            .then(setCount(count + 1))
     }
     return (
         <View>

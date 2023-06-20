@@ -3,7 +3,7 @@ import { addPortfolioRepos, addProjectRepos } from "../../utils/functions";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/User";
 
-const ProjectForm = ({ data, navigation }) => {
+const ProjectForm = ({ data, navigation, count, setCount }) => {
   const{user} = useContext(UserContext)
   const [description, onChangeDescription] = useState(data.description);
   const [theme, setTheme] = useState("");
@@ -11,6 +11,7 @@ const ProjectForm = ({ data, navigation }) => {
   const [state, setState] = useState(false);
   const handleSubmit = (event) => {
     if (description !== null && theme !== "" && lang !== "" && description !== '') {
+      navigation.navigate("My Profile");
       addProjectRepos(
         data.owner.login,
         data.html_url,
@@ -19,8 +20,8 @@ const ProjectForm = ({ data, navigation }) => {
         theme,
         lang,
         user.id
-      );
-      navigation.navigate("own profile");
+      )
+        .then(setCount(count + 1))
     } else {
       setState(true)
     }
