@@ -6,7 +6,7 @@ const MiniRepoList = ({ portfolio, navigation }) => {
     return <MiniRepoCard data={item} navigation={navigation} />;
   };
   return (
-    <View className="ml-3">
+    <View className="ml-3 my-3">
       <Text className="text-xl font-semibold">Showcase Repos</Text>
       <FlatList data={portfolio} renderItem={renderItem} />
     </View>

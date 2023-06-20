@@ -6,8 +6,10 @@ const MiniColabList = ({ project, navigation }) => {
     return <MiniColabCard data={item} navigation={navigation} />;
   };
   return (
-    <View>
-      <Text>projects open for collaboration:</Text>
+    <View className="ml-3 my-3">
+      <Text className="text-xl font-semibold">
+        Projects open for collaboration:
+      </Text>
       <FlatList data={project} renderItem={renderItem} />
     </View>
   );
