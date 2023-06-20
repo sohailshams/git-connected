@@ -7,6 +7,7 @@ import {
   query,
   where,
   updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 
@@ -35,7 +36,7 @@ export const addUser = async (
 
   try {
     const docRef = await setDoc(doc(collection(db, "users"), `${username}`), {
-      username: username,
+      username,
       avatar_url: avatar_url,
       html_url: html_url,
       name: newName,
@@ -191,4 +192,51 @@ export const getDevList = async () => {
     devList.push(doc.data());
   });
   return devList;
+};
+
+export const getUsernameById = async (uid) => {
+  const usersData = await getUserById(uid);
+  console.log(usersData);
+  return usersData.username;
+};
+
+export const addMsg = async (
+  senderId,
+  receiversIds /* array for when groupchats are introduced */,
+  msgContent,
+  msgDateSent
+) => {
+
+  const senderUsername = await getUsernameById(senderId);
+  const receiversUsernames = await Promise.all(receiversIds.map(async id => await getUsernameById(id)));
+  const chatName = receiversUsernames.join('-');
+  const usernamesObj = Object.fromEntries(receiversUsernames.map((item, i) => [i, item]))
+  const members = [...receiversUsernames]
+  members.push(senderUsername)
+  const membersObj = await Object.fromEntries(members.map((item, i) => [i, item]))
+
+  const docChatData = {
+    members: arrayUnion(membersObj),
+    lastMsg: {
+      msg_content: msgContent,
+      msg_date_sent: msgDateSent,
+      sender_username: senderUsername,
+      receivers: arrayUnion(usernamesObj),
+    },
+  };
+
+  const docMsgData = {
+    msg_content: msgContent,
+    msg_date_sent: msgDateSent,
+    sender_username: senderUsername,
+    receivers: arrayUnion(usernamesObj)
+  };
+  
+  try {
+    const docFields = await setDoc(doc(collection(db, "users", senderUsername, "conversations"), `${chatName}`), docChatData);
+    
+    const docRef = await setDoc(doc(collection(db, "users", senderUsername, "conversations", chatName, 'messages'), `${msgDateSent}`), docMsgData);
+  } catch (e) {
+    console.log(e);
+  }
 };
