@@ -240,3 +240,11 @@ export const addMsg = async (
     console.log(e);
   }
 };
+
+export const getMessageList = async(username) => {
+  const q = query(collection(db, "users", `${username}`, 'conversations'),);
+  const chatList = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => chatList.push(doc.data()));
+  return chatList;
+}

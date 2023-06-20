@@ -6,8 +6,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import ProfileNavigator from "./ProfileNavigator";
 import ProjectsNavigator from "./ProjectsNavigator";
-import Messages from "../Pages/Messages/Messages";
 import DevProfileNavigator from "./DevNavigator";
+import MessageList from "../Pages/Messages/MessageList";
+import MsgNavigator from "./MsgNavigator";
 const Nav = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
@@ -31,7 +32,7 @@ const Nav = () => {
           />
           <Tab.Screen
             name="Messages"
-            component={Messages}
+            component={MsgNavigator}
             options={{ headerShown: false }}
           />
           <Tab.Screen

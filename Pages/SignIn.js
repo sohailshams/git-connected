@@ -10,10 +10,11 @@ export default function SignIn() {
 
   onAuthStateChanged(auth, signedInUser => {
     if (signedInUser) {
+      console.log(signedInUser)
       const id = signedInUser.uid
       getUserById(id)
-      .then(data=>setUser(data))
-    
+        .then(data => setUser(data))
+      
     } else {
       setUser(false)
     }
