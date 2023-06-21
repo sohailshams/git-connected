@@ -7,7 +7,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import ProfileNavigator from "./ProfileNavigator";
 import ProjectsNavigator from "./ProjectsNavigator";
 import DevProfileNavigator from "./DevNavigator";
-import MessageList from "../Pages/Messages/MessageList";
 import MsgNavigator from "./MsgNavigator";
 const Nav = () => {
   const Tab = createBottomTabNavigator();

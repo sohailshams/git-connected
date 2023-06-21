@@ -20,6 +20,9 @@ const DevProfile = ({ navigation, route }) => {
     getProjectById(data.item.id).then((data) => setColab(data));
   }, []);
   function handlePress() {
+    // function to chatId by username and participant
+    // or if doesnt exist create the chat
+    // then handle navigation to the dm page with the prop of chatid
     navigation.navigate('Messages', { screen: 'Direct message', params: { data}})
 }
   return (

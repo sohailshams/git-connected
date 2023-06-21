@@ -248,3 +248,11 @@ export const getMessageList = async(username) => {
   querySnapshot.forEach((doc) => chatList.push(doc.data()));
   return chatList;
 }
+
+export const getMessagesById = async (chat_id, username) => {
+  const q = query(collection(db, "users", username, "conversations", chat_id, 'messages' ));
+  const msgList = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => msgList.push(doc.data()));
+  return msgList;
+}

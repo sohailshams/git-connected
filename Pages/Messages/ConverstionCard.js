@@ -1,13 +1,13 @@
 import { useContext } from "react"
 import { TouchableOpacity, Text, View, Image } from "react-native"
 import { UserContext } from "../../contexts/User"
-const MessageCard = ({ data, navigation }) => {
+const ConversationCard = ({ data, navigation }) => {
     const {user} = useContext(UserContext)
     const users = Object.keys(data.item.members)
     const otherUsers = users.filter(name => name !== user.username)
     const time = data.item.last_message.msg_date_sent.toDate().toString()
     function handlePress() {
-        navigation.navigate('Direct message', {data})
+        navigation.navigate('Direct message', {id:data.item.chat.chat_id})
     }
     return (
       <TouchableOpacity onPress={handlePress}>
@@ -20,4 +20,4 @@ const MessageCard = ({ data, navigation }) => {
       </TouchableOpacity>
     );
 }
-export default MessageCard
+export default ConversationCard
