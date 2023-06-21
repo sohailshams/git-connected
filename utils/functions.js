@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { all } from "axios";
 import {
   collection,
   doc,
@@ -9,6 +9,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
+import { formatDateString, formatTimeString } from "./helpers";
 
 const github = axios.create({
   baseURL: "https://api.github.com/",
@@ -35,7 +36,7 @@ export const addUser = async (
 
   try {
     const docRef = await setDoc(doc(collection(db, "users"), `${username}`), {
-      username: username,
+      username,
       avatar_url: avatar_url,
       html_url: html_url,
       name: newName,
@@ -75,7 +76,6 @@ export const addPortfolioRepos = async (
         userId,
       }
     );
-    console.log("document written", docRef.name);
   } catch (e) {
     console.log(e);
   }
@@ -106,7 +106,6 @@ export const addProjectRepos = async (
         userId,
       }
     );
-    console.log("document written", docRef.name);
   } catch (e) {
     console.log(e);
   }
@@ -192,3 +191,100 @@ export const getDevList = async () => {
   });
   return devList;
 };
+
+export const getUserDataById = async (uid, key) => {
+  const usersData = await getUserById(uid);
+  return key ? usersData[key] : usersData;
+};
+
+// onPress - devcard?, devprofile
+// add chatname somewhere else
+export const addChat = async (addedChatName, userId, ...otherMembersIds) => {
+  const members = [...otherMembersIds]
+  members.push(userId)
+  const memberData = await Promise.all(members.map(async userId => {
+    const username = await getUserDataById(userId, 'username')
+    const avatarUrl = await getUserDataById(userId, 'avatar_url')
+    
+    return [[username], {
+      user_id: userId,
+      username,
+      avatar_url: avatarUrl,
+      is_active: true /* to be dynamic */
+    }]
+  }))
+  const docMemberData = {'members': Object.fromEntries(memberData)}
+  const usernames = Object.keys(docMemberData.members)
+  const chatUID = usernames.join(', '); // option to rename the chat
+  
+  
+  usernames.forEach(async username => {
+      const chatName = await addedChatName ? addedChatName : otherMembersIds.length === 1 ? usernames[usernames.findIndex(user => user !== username)] : chatUID
+      const docChatData = {
+        'members': docMemberData.members,
+        'chat': {
+          chat_name: chatName,
+          chat_id: chatUID
+        }
+      }
+    const docFields = setDoc(doc(collection(db, "users", username, "conversations"), `${chatUID}`), docChatData);
+  })
+}
+
+export const getChatDataByUserId = async (userId, chatId) => {
+  const username = await getUserDataById(userId, 'username')
+
+  const q = query(
+    collection(db, "users", username, 'conversations'),
+  );
+  const chatArr = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(async doc => chatArr.push(doc.data()));
+  const chat = await chatArr.find(({ chat }) => chat.chat_id === chatId)
+  return chat;
+};
+
+// onSubmit - chat
+export const addMsg = async (chatUID, senderId, msgContent) => {
+  const sender = await getUserDataById(senderId);
+  const senderUsername = await getUserDataById(senderId, 'username');
+  const chatData = await getChatDataByUserId(senderId, chatUID)
+  const { members } = chatData
+  const usernames = Object.keys(members)
+  const receivers = {...members}
+  delete receivers[sender.username]
+  
+  try {
+    const docMsgData = {
+      msg_content: msgContent,
+      msg_date_sent: new Date(),
+      display_date: formatDateString(new Date()),
+      display_time: formatTimeString(new Date()),
+      sender: members[senderUsername],
+      receivers: receivers,
+    };
+
+    usernames.forEach(async username => {
+      const docMsgRef = await setDoc(doc(collection(db, "users", username, "conversations", chatUID, 'messages'), `${docMsgData.msg_date_sent}`), docMsgData);
+      const docLastMsgRef = await updateDoc(doc(collection(db, "users", username, "conversations"), `${chatUID}`), {last_message: docMsgData});
+    })
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getMessageList = async(username) => {
+  const q = query(collection(db, "users", `${username}`, 'conversations'),);
+  const chatList = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => chatList.push(doc.data()));
+  return chatList;
+}
+
+export const getMessagesById = async (chat_id, username) => {
+  const q = query(collection(db, "users", username, "conversations", chat_id, 'messages' ));
+  const msgList = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => msgList.push(doc.data()));
+  return msgList;
+}

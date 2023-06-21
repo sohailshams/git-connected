@@ -1,6 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import DevProfile from "../Pages/DevProfile/DevProfile";
-import DevCard from "../Pages/DevList/DevCard";
 import DevList from "../Pages/DevList/DevList";
 
 const Stack = createStackNavigator();
@@ -15,9 +14,12 @@ const DevProfileNavigator = () => {
           height: 50,
         }
     }}>
+      <Stack.Screen name="Find a Collaborator" component={DevList} />
       <Stack.Screen name="devList" component={DevList} />
       {/* <Stack.Screen name="dev card" component={DevCard} /> */}
       <Stack.Screen name="Dev Profile" component={DevProfile} />
+      
+    
     </Stack.Navigator>
   );
 };

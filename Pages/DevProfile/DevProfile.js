@@ -25,6 +25,7 @@ const DevProfile = ({ navigation, route }) => {
     getProjectById(data.item.id).then((data) => setColab(data));
   }, []);
 
+
   const [lang, setLang] = useState([]);
   useEffect(() => {
     const getLangArray = async () => {
@@ -33,6 +34,14 @@ const DevProfile = ({ navigation, route }) => {
     };
     getLangArray();
   }, []);
+  
+    function handlePress() {
+    // function to chatId by username and participant
+    // or if doesnt exist create the chat
+    // then handle navigation to the dm page with the prop of chatid
+    navigation.navigate('Messages', { screen: 'Direct message', params: { data}})
+}
+
 
   console.log(data.item);
   return (
@@ -80,6 +89,7 @@ const DevProfile = ({ navigation, route }) => {
           <MiniColabList project={colab} navigation={navigation} />
         )}
       </View>
+
     </View>
   );
 };
