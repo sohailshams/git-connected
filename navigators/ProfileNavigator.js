@@ -19,7 +19,7 @@ const ProfileNavigator = () => {
       }}
     >
       <Stack.Screen name="My Profile" component={Profile} />
-      <Stack.Screen name="add Repo" component={AddRepo} />
+      <Stack.Screen name="Add Repo" component={AddRepo} />
       <Stack.Screen name="Repo Form" component={AddRepoForm} />
       <Stack.Screen name="portfolio card" component={PortfolioCard} />
       <Stack.Screen name="Edit" component={EditProfile} />
