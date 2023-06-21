@@ -23,8 +23,8 @@ const DevCard = ({ data, navigation }) => {
 
   return (
     <TouchableOpacity
-      className="my-3"
-      onPress={() => navigation.navigate("dev profile", { data })}
+    className="my-3"
+      onPress={() => navigation.navigate("Dev Profile", { data })}
     >
       <View className="max-[320px]:justify-center bg-gray-100 border-[1px] border-black  flex flex-row max-[320px]:w-[280px] shadow-2xl m-2 p-3 items-center mx-auto min-[375px]-w-[315px] rounded-tl-[5%] rounded-br-[5%] rounded-tr-[20%] rounded-bl-[20%]">
         <View className="flex min-[375px]:flex-row max-[320px]:flex-cols-1 items-center">
