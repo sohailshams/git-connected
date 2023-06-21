@@ -1,7 +1,6 @@
 import { View, Image, Text } from "react-native";
 
 const ProfileData = ({ user }) => {
-  console.log("in ProfileData", user);
   return (
     <View className="mt-3">
       <View className="flex flex-row pl-3">

@@ -7,7 +7,14 @@ const Stack = createStackNavigator();
 
 const DevProfileNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: "rgb(113, 113, 122)",
+          height: 50,
+        }
+    }}>
       <Stack.Screen name="devList" component={DevList} />
       {/* <Stack.Screen name="dev card" component={DevCard} /> */}
       <Stack.Screen name="dev profile" component={DevProfile} />
