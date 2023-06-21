@@ -6,7 +6,7 @@ import ProjectForm from "../../components/ProfileForms/ProjectForm";
 
 const AddRepoForm = ({ navigation, route }) => {
   const { data, count, setCount } = route.params;
-  console.log(count)
+  console.log(count);
   const [state, setState] = useState(1);
   return (
     <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
@@ -14,15 +14,25 @@ const AddRepoForm = ({ navigation, route }) => {
         <Text className="text-3xl font-semibold m-3">Upload a Repo</Text>
       </View>
       <FormButtons
-        title1="Add to profile showcase"
-        title2="Add to collaboration list"
+        title1="Showcase List"
+        title2="Collaboration List"
         state={state}
         setState={setState}
       />
       {state === 1 ? (
-        <PortfolioForm data={data} navigation={navigation} count={count} setCount={setCount} />
+        <PortfolioForm
+          data={data}
+          navigation={navigation}
+          count={count}
+          setCount={setCount}
+        />
       ) : (
-        <ProjectForm data={data} navigation={navigation} count={count} setCount={setCount} />
+        <ProjectForm
+          data={data}
+          navigation={navigation}
+          count={count}
+          setCount={setCount}
+        />
       )}
     </View>
   );
