@@ -9,23 +9,20 @@ const Stack = createStackNavigator();
 
 const ProfileNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: 'black',
-        // Additional styling options
-        height: 50,
-        // width: 100,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        borderRadius: 50,
-      },
-    }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: "rgb(113, 113, 122)",
+          height: 50,
+        },
+      }}
+    >
       <Stack.Screen name="My Profile" component={Profile} />
       <Stack.Screen name="add Repo" component={AddRepo} />
       <Stack.Screen name="Repo Form" component={AddRepoForm} />
-      <Stack.Screen name='portfolio card' component={PortfolioCard} />
-      <Stack.Screen name='Edit' component={EditProfile} /> 
+      <Stack.Screen name="portfolio card" component={PortfolioCard} />
+      <Stack.Screen name="Edit" component={EditProfile} />
     </Stack.Navigator>
   );
 };
