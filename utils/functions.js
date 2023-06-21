@@ -7,9 +7,9 @@ import {
   query,
   where,
   updateDoc,
-  arrayUnion,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
+import { formatDateString, formatTimeString } from "./helpers";
 
 const github = axios.create({
   baseURL: "https://api.github.com/",
@@ -197,30 +197,36 @@ export const getUserDataById = async (uid, key) => {
   return key ? usersData[key] : usersData;
 };
 
-// onPress - devcard, devprofile
-export const addChat = async (chatName, ...membersIds) => {
-  const memberData = await Promise.all(membersIds.map(async user_id => {
-    const username = await getUserDataById(user_id, 'username')
-    const avatar_url = await getUserDataById(user_id, 'avatar_url')
+// onPress - devcard?, devprofile
+// add chatname somewhere else
+export const addChat = async (addedChatName, userId, ...otherMembersIds) => {
+  const members = [...otherMembersIds]
+  members.push(userId)
+  const memberData = await Promise.all(members.map(async userId => {
+    const username = await getUserDataById(userId, 'username')
+    const avatarUrl = await getUserDataById(userId, 'avatar_url')
     
     return [[username], {
-      user_id,
-      avatar_url,
+      user_id: userId,
+      username,
+      avatar_url: avatarUrl,
       is_active: true /* to be dynamic */
     }]
   }))
   const docMemberData = {'members': Object.fromEntries(memberData)}
   const usernames = Object.keys(docMemberData.members)
   const chatUID = usernames.join(', '); // option to rename the chat
-  const docChatData = {
-    'members': docMemberData.members,
-    'chat': {
-      chat_name: chatName ? chatName : chatUID,
-      chat_id: chatUID
-    }
-  }
+  
   
   usernames.forEach(async username => {
+      const chatName = await addedChatName ? addedChatName : otherMembersIds.length === 1 ? usernames[usernames.findIndex(user => user !== username)] : chatUID
+      const docChatData = {
+        'members': docMemberData.members,
+        'chat': {
+          chat_name: chatName,
+          chat_id: chatUID
+        }
+      }
     const docFields = setDoc(doc(collection(db, "users", username, "conversations"), `${chatUID}`), docChatData);
   })
 }
@@ -240,25 +246,27 @@ export const getChatDataByUserId = async (userId, chatId) => {
 
 // onSubmit - chat
 export const addMsg = async (chatUID, senderId, msgContent) => {
+  const sender = await getUserDataById(senderId);
   const senderUsername = await getUserDataById(senderId, 'username');
   const chatData = await getChatDataByUserId(senderId, chatUID)
   const { members } = chatData
-  const { chat } = chatData
-  const usernames = await Object.keys(members)
-  const receivers = await {...members}
-  delete receivers[senderUsername]
-    
+  const usernames = Object.keys(members)
+  const receivers = {...members}
+  delete receivers[sender.username]
+  
   try {
     const docMsgData = {
       msg_content: msgContent,
       msg_date_sent: new Date(),
-      sender_username: senderUsername,
+      display_date: formatDateString(new Date()),
+      display_time: formatTimeString(new Date()),
+      sender: members[senderUsername],
       receivers: receivers,
     };
 
     usernames.forEach(async username => {
       const docMsgRef = await setDoc(doc(collection(db, "users", username, "conversations", chatUID, 'messages'), `${docMsgData.msg_date_sent}`), docMsgData);
-      const docLastMsgRef = await setDoc(doc(collection(db, "users", username, "conversations"), `${chatUID}`), {chat, members, last_message: docMsgData});
+      const docLastMsgRef = await updateDoc(doc(collection(db, "users", username, "conversations"), `${chatUID}`), {last_message: docMsgData});
     })
   } catch (e) {
     console.log(e);
