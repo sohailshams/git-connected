@@ -9,8 +9,10 @@ const AddRepoForm = ({ navigation, route }) => {
   console.log(count)
   const [state, setState] = useState(1);
   return (
-    <View>
-      <Text>repo form here</Text>
+    <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
+      <View className=" bg-gray-300 mx-auto rounded-md shadow-lg mt-3 text-left ml-3">
+        <Text className="text-3xl font-semibold m-3">Upload a Repo</Text>
+      </View>
       <FormButtons
         title1="Add to profile showcase"
         title2="Add to collaboration list"

@@ -26,7 +26,9 @@ const AddRepo = ({ navigation, route }) => {
   return (
     <ScrollView>
       <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
-        <Text className="text-2xl font-semibold ml-3 mt-3">Select a Repo</Text>
+      <View className=" bg-gray-300 mx-auto rounded-md shadow-lg mt-3 mb-3 text-left ml-3">
+        <Text className="text-3xl font-semibold m-3">Select a Repo</Text>
+      </View>
 
         <FlatList
           data={repos}
