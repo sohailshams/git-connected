@@ -85,7 +85,7 @@ const Profile = ({ navigation }) => {
         <View className="flex flex-row justify-between w-[310px] ml-3 mb-3 max-[375px]:flex-col">
           <TouchableOpacity
             className="bg-zinc-500 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1"
-            onPress={() => navigation.navigate("add Repo", { count, setCount })}
+            onPress={() => navigation.navigate("Add Repo", { count, setCount })}
           >
             <Text className="text-white">Add Repo</Text>
           </TouchableOpacity>
