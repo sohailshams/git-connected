@@ -1,7 +1,6 @@
 import { View, Text, Button, TouchableOpacity } from "react-native";
 
 const FormButtons = ({ title1, title2, state, setState }) => {
-  console.log("stat>>>>>>", state);
   const handleButton1 = () => {
     setState(1);
   };
@@ -30,8 +29,6 @@ const FormButtons = ({ title1, title2, state, setState }) => {
       >
         <Text className="text-white">{title2}</Text>
       </TouchableOpacity>
-      {/* <Button title={title1} onPress={handleButton1 } /> */}
-      {/* <Button title={title2} onPress={handleButton2} /> */}
     </View>
   );
 };

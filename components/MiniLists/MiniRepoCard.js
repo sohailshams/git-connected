@@ -2,7 +2,6 @@ import { Text, View, Button, Linking } from "react-native";
 import { TouchableOpacity } from "react-native";
 
 const MiniRepoCard = ({ data, navigation }) => {
-  console.log(data, "In mini repo card");
   function handlePress() {
     navigation.navigate("portfolio card", { data });
   }

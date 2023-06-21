@@ -11,7 +11,6 @@ import {
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import FormButtons from "../../components/ProfilePage/FormButtons";
-import ProfileData from "../../components/ProfilePage/ProfileData";
 import {
   getDevLanguages,
   getPortfolioById,
@@ -60,7 +59,6 @@ const Profile = ({ navigation }) => {
             className="rounded-full ml-3 mt-3 h-[80px] w-[80px]"
             source={user.avatar_url}
           />
-          {/* <ProfileData user={data} /> */}
           <View className="w-full min-[320]-ml-5 mt-5">
             <View className="w-5/6 ml-3">
               <FlatList
@@ -107,26 +105,6 @@ const Profile = ({ navigation }) => {
             <Text className="text-white">Sign Out</Text>
           </TouchableOpacity>
         </View>
-        {/* <Button
-        title="add repo"
-        onPress={() => navigation.navigate("add Repo", { count, setCount })}
-      /> */}
-        {/* <FormButtons
-          title1="Showcase list"
-          title2="collaboration list"
-          state={state}
-          setState={setState}
-        />
-        {state === 1 ? (
-          <MiniRepoList portfolio={portfolio} navigation={navigation} />
-        ) : (
-          <MiniColabList project={colab} navigation={navigation} />
-        )} */}
-        {/* <Button title="Sign out" onPress={handleSignOut} /> */}
-        {/* <Button
-        title="edit"
-        onPress={() => navigation.navigate("Edit", { data, count, setCount })}
-      /> */}
       </View>
       <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
         <FormButtons
