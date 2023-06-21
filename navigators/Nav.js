@@ -35,7 +35,7 @@ const Nav = () => {
             options={{ headerShown: false }}
           />
           <Tab.Screen
-            name="account"
+            name="Profile"
             component={ProfileNavigator}
             options={{ headerShown: false }}
           />
