@@ -2,7 +2,7 @@ import { Text, View, FlatList, ScrollView, Button, TextInput } from "react-nativ
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../../contexts/User";
 import MsgCard from "./MsgCard";
-import { getMessagesById } from "../../utils/functions";
+import { addMsg, getMessagesById } from "../../utils/functions";
 
 
 const DirectMessage = ({route, navigation}) => {
@@ -14,8 +14,8 @@ const DirectMessage = ({route, navigation}) => {
       getMessagesById(id, user.username).then(res => setMsgList(res))
     }, []);
     function handlePress() {
-        //function to send message
-        //then setMsg('')
+        addMsg(id, user.id, msg)
+        .then(setMsg(''))
     }
 
     const renderItem = (item) => {
