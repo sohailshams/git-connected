@@ -2,7 +2,7 @@ import { UserContext } from "../../contexts/User";
 import { useState, useEffect, useContext } from "react";
 
 import { addChat, getChatId, getUserById } from "../../utils/functions";
-import { View, Text, Button, FlatList } from "react-native";
+import { View, Text, Button, FlatList, Image} from "react-native";
 
 
 import ProfileData from "../../components/ProfilePage/ProfileData";
@@ -31,10 +31,8 @@ const DevProfile = ({ navigation, route }) => {
 
   function handlePress() {
     addChat(null, user.id, data.item.id)
-    .then(id => navigation.navigate('Messages', {screen:'Direct message', params:{id}}))
-    // getChatId(user.id, data.item.id)
-    // .then(id => console.log(id))
-
+      .then(id => navigation.navigate('Messages', { screen: 'Direct message', params: { id } }))
+  }
 
 
   const [lang, setLang] = useState([]);
@@ -46,7 +44,7 @@ const DevProfile = ({ navigation, route }) => {
     getLangArray();
   }, []);
   
-}
+
 
 
   console.log(data.item);
@@ -76,6 +74,7 @@ const DevProfile = ({ navigation, route }) => {
             </View>
           </View>
         </View>
+        <Button title='message' onPress={handlePress}/>
         <View className="ml-3 my-5">
           <Text className="text-2xl font-semibold ">{data.item.username}</Text>
           <Text className="text-normal mt-1">{data.item.bio}</Text>
