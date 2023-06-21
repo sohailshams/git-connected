@@ -1,13 +1,13 @@
-import { View, Text, TouchableOpacity, Linking, Image } from 'react-native';
-import { useContext, useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Linking, Image } from "react-native";
+import { useContext, useEffect, useState } from "react";
 
-import { getUserById } from '../../utils/functions';
+import { getUserById } from "../../utils/functions";
 
-import React from 'react';
+import React from "react";
 
 const DetailedColabCard = ({ route }) => {
   const { data } = route.params;
-  const [userData, setUserData] = useState('');
+  const [userData, setUserData] = useState("");
 
   useEffect(() => {
     getUserById(data.item.userId).then((userData) => setUserData(userData));
@@ -40,14 +40,13 @@ const DetailedColabCard = ({ route }) => {
         </View>
       </View>
       <View className="flex flex-row justify-between w-[125px]">
-        <TouchableOpacity>
-          <Text
-            className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold"
-            onPress={() => Linking.openURL(`${data.item.html_url}`)}
-          >
+        <TouchableOpacity
+          onPress={() => Linking.openURL(`${data.item.html_url}`)}
+        >
+          <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold">
             GitHub
           </Text>
-        </TouchableOpacity>{' '}
+        </TouchableOpacity>
         <TouchableOpacity>
           <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold">
             Collaborate

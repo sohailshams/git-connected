@@ -6,7 +6,15 @@ import DetailedColabCard from "../Pages/Projects/DetailedColabCard";
 const ProjectsNavigator = () => {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: "rgb(113, 113, 122)",
+          height: 50,
+        },
+      }}
+    >
       <Stack.Screen name="Browse Projects" component={ProjectList} />
       <Stack.Screen name="Detailed Colab Card" component={DetailedColabCard} />
     </Stack.Navigator>

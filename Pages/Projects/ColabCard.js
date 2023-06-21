@@ -1,27 +1,26 @@
-import { View, Text, Image, Linking, ScrollView } from 'react-native';
-import React from 'react';
-import { TouchableOpacity } from 'react-native-web';
-import { useContext, useEffect, useState } from 'react';
-import { getUserById } from '../../utils/functions';
+import { View, Text, Image, Linking, ScrollView } from "react-native";
+import React from "react";
+import { TouchableOpacity } from "react-native-web";
+import { useContext, useEffect, useState } from "react";
+import { getUserById } from "../../utils/functions";
 
 const ColabCard = ({ data, navigation }) => {
   function handlePress() {
-    navigation.navigate('Detailed Colab Card', { data });
+    navigation.navigate("Detailed Colab Card", { data });
   }
 
-    const [userData, setUserData] = useState('');
-    
-    useEffect(() => {
-      getUserById(data.item.userId).then((userData) => setUserData(userData));
-    }, []);
+  const [userData, setUserData] = useState("");
 
+  useEffect(() => {
+    getUserById(data.item.userId).then((userData) => setUserData(userData));
+  }, []);
 
   return (
-    <ScrollView>
+    // <ScrollView>
     <TouchableOpacity onPress={handlePress}>
       <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
         <View className="pl-3">
-        <View className=" bg-gray-300 mx-auto rounded-md shadow-lg mt-3 text-left ml-0">
+          <View className=" bg-gray-300 mx-auto rounded-md shadow-lg mt-3 text-left ml-0">
             <Text className="text-3xl font-semibold m-3">{data.item.name}</Text>
           </View>
           <Text className="text-lg font-semibold mt-3 ml-3">Theme/Genre</Text>
@@ -39,7 +38,7 @@ const ColabCard = ({ data, navigation }) => {
         </View>
       </View>
     </TouchableOpacity>
-    </ScrollView>
+    // </ScrollView>
   );
-  }
+};
 export default ColabCard;
