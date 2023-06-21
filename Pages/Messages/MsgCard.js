@@ -4,9 +4,8 @@ import { UserContext } from "../../contexts/User"
 
 const MsgCard = ({ data }) => {
     const {user} = useContext(UserContext) // use to check if sender is logged in user
-    const sender = data.item.sender.user_id
-    const time = data.item.msg_date_sent.toDate().toString()
-    //will add sender image later
+    const sender = data.item.sender.username 
+    const time = data.item.display_date
     return (
       <View>
         <Text>{data.item.msg_content}</Text>

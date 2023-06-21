@@ -8,8 +8,6 @@ import { getMessagesById } from "../../utils/functions";
 const DirectMessage = ({route, navigation}) => {
     const { user } = useContext(UserContext);
     const { id } = route.params
-    const flatList = useRef(null)
-    console.log(id)
     const [msgList, setMsgList] = useState([]);
     const [msg, setMsg] = useState('')
     useEffect(() => {
