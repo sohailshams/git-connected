@@ -1,5 +1,5 @@
 import { Text, View, FlatList, ScrollView, Button, TextInput } from "react-native"
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../../contexts/User";
 import MsgCard from "./MsgCard";
 import { getMessagesById } from "../../utils/functions";
@@ -8,6 +8,7 @@ import { getMessagesById } from "../../utils/functions";
 const DirectMessage = ({route, navigation}) => {
     const { user } = useContext(UserContext);
     const { id } = route.params
+    const flatList = useRef(null)
     console.log(id)
     const [msgList, setMsgList] = useState([]);
     const [msg, setMsg] = useState('')
@@ -25,9 +26,18 @@ const DirectMessage = ({route, navigation}) => {
     return (
       <ScrollView>
         <View>
-            <FlatList data={msgList} renderItem={renderItem} />
-            <TextInput placeholder="message..." value={msg} onChangeText={setMsg}/>
-            <Button title='send' onPress={handlePress}/>
+          <FlatList
+            data={msgList}
+            renderItem={renderItem}
+            
+        
+          />
+          <TextInput
+            placeholder="message..."
+            value={msg}
+            onChangeText={setMsg}
+          />
+          <Button title="send" onPress={handlePress} />
         </View>
       </ScrollView>
     );
