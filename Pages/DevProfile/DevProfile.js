@@ -31,7 +31,7 @@ const DevProfile = ({ navigation, route }) => {
 
   function handlePress() {
     addChat(null, user.id, data.item.id)
-      .then(id => navigation.navigate('Messages', { screen: 'Direct message', params: { id } }))
+      .then(id => navigation.navigate('Messages', { screen: 'Direct message', initial:false, params: { id } }))
   }
 
 
