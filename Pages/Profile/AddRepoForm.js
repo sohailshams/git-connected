@@ -6,7 +6,6 @@ import ProjectForm from "../../components/ProfileForms/ProjectForm";
 
 const AddRepoForm = ({ navigation, route }) => {
   const { data, count, setCount } = route.params;
-  console.log(count);
   const [state, setState] = useState(1);
   return (
     <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
