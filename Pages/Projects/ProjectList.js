@@ -3,9 +3,11 @@ import { View, Text, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase.config';
 import ColabCard from './ColabCard';
+import OpeningAnimation from '../Transition/transitionanimation';
 
 const ProjectList = ({ navigation }) => {
   const [projectList, setProjectList] = useState([]);
+  const [animationVisible, setAnimationVisible] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -20,12 +22,21 @@ const ProjectList = ({ navigation }) => {
   }, []);
 
   const renderProjectItem = (item) => {
-    return <ColabCard data={item} navigation={navigation}/>;
+    return <ColabCard data={item} navigation={navigation} />;
+  };
+
+  const onAnimationComplete = () => {
+    setAnimationVisible(false);
   };
 
   return (
     <View>
-      <FlatList data={projectList} renderItem={renderProjectItem} />
+      {animationVisible && (
+        <OpeningAnimation onAnimationComplete={onAnimationComplete} />
+      )}
+      {!animationVisible && (
+        <FlatList data={projectList} renderItem={renderProjectItem} />
+      )}
     </View>
   );
 };
