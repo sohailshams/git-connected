@@ -1,7 +1,7 @@
 import { UserContext } from "../../contexts/User";
 import { useState, useEffect, useContext } from "react";
 import { getUserById } from "../../utils/functions";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import ProfileData from "../../components/ProfilePage/ProfileData";
 import FormButtons from "../../components/ProfilePage/FormButtons";
 import { getPortfolioById, getProjectById } from "../../utils/functions";
@@ -19,10 +19,16 @@ const DevProfile = ({ navigation, route }) => {
   useEffect(() => {
     getProjectById(data.item.id).then((data) => setColab(data));
   }, []);
-
+  function handlePress() {
+    // function to chatId by username and participant
+    // or if doesnt exist create the chat
+    // then handle navigation to the dm page with the prop of chatid
+    navigation.navigate('Messages', { screen: 'Direct message', params: { data}})
+}
   return (
     <View>
       <ProfileData user={data.item} />
+      <Button title='Message' onPress={handlePress}/>
       <FormButtons
         state={state}
         setState={setState}
