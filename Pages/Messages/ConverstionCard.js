@@ -5,7 +5,6 @@ const ConversationCard = ({ data, navigation }) => {
     const {user} = useContext(UserContext)
     const users = Object.keys(data.item.members)
     const otherUsers = users.filter(name => name !== user.username)
-    console.log(data.item.last_message)
     function handlePress() {
         navigation.navigate('Direct message', {id:data.item.chat.chat_id})
     }
