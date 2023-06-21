@@ -17,7 +17,7 @@ const DevProfileNavigator = () => {
     }}>
       <Stack.Screen name="devList" component={DevList} />
       {/* <Stack.Screen name="dev card" component={DevCard} /> */}
-      <Stack.Screen name="dev profile" component={DevProfile} />
+      <Stack.Screen name="Dev Profile" component={DevProfile} />
     </Stack.Navigator>
   );
 };

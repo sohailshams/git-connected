@@ -53,7 +53,7 @@ const DevProfile = ({ navigation, route }) => {
                 }}
                 data={makeUniqueArray(lang[data.item.username])}
                 renderItem={({ item }) => (
-                  <Text className="py-1 px-2 ml-3 rounded-full my-1 text-center w-[90px] text-white bg-zinc-500 shadow-2xl">
+                  <Text className="py-1 px-2 ml-3 rounded-full my-1 text-center w-[90px] text-slate-700 bg-slate-300 shadow-2xl">
                     {item}
                   </Text>
                 )}

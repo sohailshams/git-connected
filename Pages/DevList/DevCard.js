@@ -24,7 +24,7 @@ const DevCard = ({ data, navigation }) => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("dev profile", { data })}
+      onPress={() => navigation.navigate("Dev Profile", { data })}
     >
       <View className="flex flex-row border-[1px] border-black m-2 p-5 items-center mx-auto w-[315px]">
         <Image
