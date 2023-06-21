@@ -15,18 +15,29 @@ const DetailedColabCard = ({ route }) => {
   }, []);
 
   return (
-    <View className="flex flex-column border-[1px] border-black m-2 p-5 items-left">
-      <View className="flex flex-row justify-between items-center">
-      <View>
-      <Text className="font-semibold">Project Name: {data.item.name}</Text>
-      <Text className="font-semibold">
-        Project Description: {data.item.description}
-      </Text>
-      <Text className="font-semibold">Project Theme: {data.item.theme}</Text>{' '}
-      <Text className="font-semibold">
-        Languages Wanted: {data.item.languagesWanted}
-      </Text>
-      </View>
+    <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
+      <View className="flex flex-row justify-between items-center m-3">
+        <View>
+          <Text className="text-4xl font-semibold m-3">{data.item.name}</Text>
+          <Text className="text-lg font-semibold mt-3 ml-3">
+            Description
+          </Text>
+          <Text className="font-medium m-3">
+            {data.item.description}
+          </Text>
+          <Text className="text-lg font-semibold mt-3 ml-3">
+            Theme/Genre
+          </Text>
+          <Text className="font-medium m-3">
+            {data.item.theme}
+          </Text>
+          <Text className="text-lg font-semibold mt-3 ml-3">
+            Languages Wanted
+          </Text>
+          <Text className="font-medium m-3">
+            {data.item.languagesWanted}
+          </Text>
+        </View>
         <View>
           <Image
             className="rounded-full ml-3 mt-3 h-[80px] w-[80px]"
@@ -40,7 +51,7 @@ const DetailedColabCard = ({ route }) => {
       <View>
         <TouchableOpacity>
           <Text
-            className="bg-lime-700 my-1 py-1 px-2 text-white text-center w-[80px] rounded-full"
+            className="bg-lime-700 my-1 py-1 px-2 text-white text-center w-[80px] rounded-full m-3"
             onPress={() => Linking.openURL(`${data.item.html_url}`)}
           >
             GitHub
