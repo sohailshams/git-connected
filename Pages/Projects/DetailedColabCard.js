@@ -1,18 +1,16 @@
 import { View, Text, TouchableOpacity, Linking, Image } from 'react-native';
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../contexts/User';
+
 import { getUserById } from '../../utils/functions';
 
 import React from 'react';
 
 const DetailedColabCard = ({ route }) => {
   const { data } = route.params;
-  console.log(route.params);
-
-  const { user } = useContext(UserContext);
   const [userData, setUserData] = useState('');
+
   useEffect(() => {
-    getUserById(user.id).then((userData) => setUserData(userData));
+    getUserById(data.item.userId).then((userData) => setUserData(userData));
   }, []);
 
   return (
@@ -31,11 +29,10 @@ const DetailedColabCard = ({ route }) => {
           </Text>
           <Text className="font-medium m-3">{data.item.languagesWanted}</Text>
         </View>
-
         <View className="min-[768px]:absolute top-0 right-5 flex flex-cols-1 items-center">
           <Image
             className="rounded-full ml-3 mt-3 h-[80px] w-[80px]"
-            source={user.avatar_url}
+            source={userData.avatar_url}
           />
           <Text className="text-2xl font-semibold m3">
             {data.item.username}
