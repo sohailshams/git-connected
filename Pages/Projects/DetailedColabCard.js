@@ -8,12 +8,8 @@ import { UserContext } from "../../contexts/User";
 import { addChat } from "../../utils/functions";
 
 const DetailedColabCard = ({ route, navigation }) => {
-  const { data } = route.params;
+  const { data, userData } = route.params;
   const {user} = useContext(UserContext)
-  const [userData, setUserData] = useState("");
-  useEffect(() => {
-    getUserById(data.item.userId).then((userData) => setUserData(userData));
-  }, []);
   
   function handlePress() {
     addChat(null, user.id, data.item.userId).then((id) =>

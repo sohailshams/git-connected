@@ -27,7 +27,7 @@ const DevCard = ({ data, navigation }) => {
     if (user.username !== data.item.username) {
       navigation.navigate("Dev Profile", { data })}
   else {
-    navigation.navigate('My Profile')
+    navigation.navigate('Profile')
     }
   }
 
