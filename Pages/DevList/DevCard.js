@@ -6,12 +6,14 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getDevLanguages, makeUniqueArray } from "../../utils/functions";
 import DevProfile from "../DevProfile/DevProfile";
+import { UserContext } from "../../contexts/User";
 
 const DevCard = ({ data, navigation }) => {
   const [lang, setLang] = useState([]);
+  const {user} = useContext(UserContext)
 
   useEffect(() => {
     const getLangArray = async () => {
@@ -21,10 +23,18 @@ const DevCard = ({ data, navigation }) => {
     getLangArray();
   }, []);
 
+  function handlePress() {
+    if (user.username !== data.item.username) {
+      navigation.navigate("Dev Profile", { data })}
+  else {
+    navigation.navigate('My Profile')
+    }
+  }
+
   return (
     <TouchableOpacity
     className="my-3"
-      onPress={() => navigation.navigate("Dev Profile", { data })}
+      onPress={handlePress}
     >
       <View className="max-[320px]:justify-center bg-gray-100 border-[1px] border-black  flex flex-row max-[320px]:w-[280px] shadow-2xl m-2 p-3 items-center mx-auto min-[375px]-w-[315px] rounded-tl-[5%] rounded-br-[5%] rounded-tr-[20%] rounded-bl-[20%]">
         <View className="flex min-[375px]:flex-row max-[320px]:flex-cols-1 items-center">

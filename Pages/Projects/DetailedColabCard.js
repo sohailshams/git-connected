@@ -4,14 +4,26 @@ import { useContext, useEffect, useState } from "react";
 import { getUserById } from "../../utils/functions";
 
 import React from "react";
+import { UserContext } from "../../contexts/User";
+import { addChat } from "../../utils/functions";
 
-const DetailedColabCard = ({ route }) => {
+const DetailedColabCard = ({ route, navigation }) => {
   const { data } = route.params;
+  const {user} = useContext(UserContext)
   const [userData, setUserData] = useState("");
-
   useEffect(() => {
     getUserById(data.item.userId).then((userData) => setUserData(userData));
   }, []);
+  
+  function handlePress() {
+    addChat(null, user.id, data.item.userId).then((id) =>
+      navigation.navigate("Messages", {
+        screen: "Direct message",
+        initial: false,
+        params: { id },
+      })
+    );
+  }
 
   return (
     <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
@@ -48,7 +60,7 @@ const DetailedColabCard = ({ route }) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold">
+          <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold" onPress={handlePress}>
             Collaborate
           </Text>
         </TouchableOpacity>

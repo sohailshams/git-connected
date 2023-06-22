@@ -8,22 +8,17 @@ import { db } from "../../firebase.config"
 
 const ConversationList = ({ navigation }) => {
   const { user } = useContext(UserContext)
-  
-    const [data, setData] = useState([])
-    // useEffect(() => {
-    //     getMessageList(user.username)
-    //         .then(data => setData(data))
-    // }, [])
+  const [data, setData] = useState([])
+    
   useEffect(()=>{
   const q = query(collection(db, "users", `${user.username}`, 'conversations'),);
   onSnapshot(q, (querySnapshot) => {
     const chatList = [];
-      console.log('listen')
-      querySnapshot.forEach((doc) => chatList.push(doc.data()));
-      setData(chatList)
+    querySnapshot.forEach((doc) => chatList.push(doc.data()));
+    setData(chatList)
     })
   }, [])
-  console.log(data)
+  
 
       const renderItem = (item) => {
         return <ConversationCard data={item} navigation={navigation} />;
