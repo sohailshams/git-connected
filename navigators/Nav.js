@@ -8,6 +8,8 @@ import ProfileNavigator from "./ProfileNavigator";
 import ProjectsNavigator from "./ProjectsNavigator";
 import DevProfileNavigator from "./DevNavigator";
 import MsgNavigator from "./MsgNavigator";
+import { Image } from "react-native";
+
 const Nav = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
@@ -18,6 +20,15 @@ const Nav = () => {
         <Tab.Navigator
           screenOptions={{ headerTitleAlign: "center" }}
           initialRouteName={user.isNewUser ? "Profile" : "Home"}
+          tabBarOptions={{
+            headerTitleAlign: "center",
+            headerRight: () => (
+              <Image
+                source={require("../assets/Git-Connected-1.png")}
+                style={{ width: 30, height: 30, marginRight: 10 }}
+              />
+            ),
+          }}
         >
           <Tab.Screen
             name="Projects"

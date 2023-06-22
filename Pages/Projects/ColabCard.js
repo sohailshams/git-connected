@@ -6,7 +6,7 @@ import { getUserById } from "../../utils/functions";
 
 const ColabCard = ({ data, navigation }) => {
   function handlePress() {
-    navigation.navigate("Detailed Colab Card", { data });
+    navigation.navigate("Project Detail", { data, userData});
   }
 
   const [userData, setUserData] = useState("");
