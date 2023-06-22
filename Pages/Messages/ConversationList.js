@@ -30,7 +30,7 @@ const ConversationList = ({ navigation }) => {
       };
       return (
         <ScrollView>
-          <View>
+    <View>
             <FlatList data={data} renderItem={renderItem} />
           </View>
         </ScrollView>
