@@ -26,7 +26,7 @@ const DirectMessage = ({ route, navigation }) => {
     onSnapshot(q, (querySnapshot) => {
       const msgList = [];
       querySnapshot.forEach((doc) => msgList.push(doc.data()));
-      setMsgList(msgList);
+      setMsgList(msgList.reverse());
     });
   }, []);
   function handlePress() {
@@ -40,7 +40,7 @@ const DirectMessage = ({ route, navigation }) => {
     <ScrollView>
       <View className="h-[500px] w-5/6 max-[768px]:w-[90%] bg-white mx-auto rounded-md shadow-lg my-3">
         <FlatList
-          data={msgList.reverse()}
+          data={msgList}
           renderItem={renderItem}
           inverted={-1}
         />
