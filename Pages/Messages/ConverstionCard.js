@@ -42,20 +42,23 @@ const ConversationCard = ({ data, navigation, newMsgSenders, setNewMsgSenders })
             />
           </View>
           <View className="flex flex-cols-1 items-end">
-            <View className=" max-w-[500px] p-2 m-3 rounded-md shadow-lg text-md m-3 bg-black text-white ">
-               {newMsgSenders.includes(otherUsers[0]) ? <Text className="bg-black py-2 px-3 rounded-md text-white">{newMsgsCount} new messages</Text> : null }
+            <View className=" max-w-[500px] p-2 m-3 text-md m-3 ">
+              {newMsgSenders.includes(otherUsers[0]) ? (
+                <Text className="bg-black py-2 px-3 rounded-md text-white">
+                  {newMsgsCount} new messages
+                </Text>
+              ) : null}
             </View>
-            <View className=''>
-            <Text
-              className={`max-w-[500px] max-h-[60px] p-2 m-3 rounded-md shadow-lg truncate   ${
-                user.username !==
-                sender
-                  ? 'bg-gray-300 justify-start'
-                  : 'bg-lime-400 justify-end'
-              }`}
-            >
-              {msg}
-            </Text>
+            <View className="">
+              <Text
+                className={`max-w-[500px] max-h-[60px] p-2 m-3 rounded-md shadow-lg truncate   ${
+                  user.username !== sender
+                    ? "bg-gray-300 justify-start"
+                    : "bg-lime-400 justify-end"
+                }`}
+              >
+                {msg}
+              </Text>
             </View>
             <Text className="justify-right text-xs">
               {sender}, {time}
