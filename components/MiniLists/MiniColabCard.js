@@ -1,9 +1,16 @@
+import { useEffect, useState } from "react";
 import { Text, View, Button } from "react-native";
 import { TouchableOpacity } from "react-native";
+import { getUserById } from "../../utils/functions";
 
 const MiniColabCard = ({ data, navigation }) => {
+  const [user, setUser] = useState('')
+  useEffect(() => { getUserById(data.userId).then(data => setUser(data)) }, [])
   function handlePress() {
-    navigation.navigate("Projects", { screen: "Project list", data });
+    navigation.navigate("Projects", {
+      screen: "Detailed Colab Card",
+      params: { data: { item: data }, userData: user },
+    });
   }
   return (
     <View className="flex flex-column border-[1px] border-black my-3 p-5 w-5/6">
