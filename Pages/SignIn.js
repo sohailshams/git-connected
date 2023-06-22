@@ -49,7 +49,7 @@ export default function SignIn() {
           </Text>
           <Image
             className="h-[200px] w-[200px]"
-            source={require("../assets/git connected-logos_black.png")}
+            source={require("../assets/Git-Connected-1.png")}
           />
           <TouchableOpacity
             className="bg-zinc-500 shadow-2xl py-3 px-5  rounded-full text-center my-5"
