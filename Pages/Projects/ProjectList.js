@@ -1,6 +1,6 @@
 
-import { collection, getDocs, query } from 'firebase/firestore';
-import { View, Text, FlatList } from 'react-native';
+import { collection, getDocs, query, onSnapshot } from 'firebase/firestore';
+import { View, Text, FlatList, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase.config';
 import ColabCard from './ColabCard';
