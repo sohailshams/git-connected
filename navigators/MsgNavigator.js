@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 const MsgNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Msg List">
           <Stack.Screen name='Msg List' component={ConversationList} />
           <Stack.Screen name='Direct message' component={DirectMessage}/>
     </Stack.Navigator>

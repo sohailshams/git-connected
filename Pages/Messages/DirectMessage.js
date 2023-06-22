@@ -2,8 +2,9 @@ import { Text, View, FlatList, ScrollView, Button, TextInput } from "react-nativ
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../../contexts/User";
 import MsgCard from "./MsgCard";
-import { getMessagesById } from "../../utils/functions";
-
+import { addMsg, getMessagesById } from "../../utils/functions";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase.config"
 
 const DirectMessage = ({route, navigation}) => {
     const { user } = useContext(UserContext);
@@ -11,11 +12,16 @@ const DirectMessage = ({route, navigation}) => {
     const [msgList, setMsgList] = useState([]);
     const [msg, setMsg] = useState('')
     useEffect(() => {
-      getMessagesById(id, user.username).then(res => setMsgList(res))
+      const q = query(collection(db, "users", user.username, "conversations", id, 'messages' ));
+        onSnapshot(q, (querySnapshot) => {
+            const msgList = [];
+            querySnapshot.forEach((doc) => msgList.push(doc.data()));
+            setMsgList(msgList)
+        })
     }, []);
     function handlePress() {
-        //function to send message
-        //then setMsg('')
+        addMsg(id, user.id, msg)
+        .then(setMsg(''))
     }
 
     const renderItem = (item) => {

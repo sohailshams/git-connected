@@ -1,7 +1,10 @@
 import { UserContext } from "../../contexts/User";
 import { useState, useEffect, useContext } from "react";
-import { getUserById } from "../../utils/functions";
-import { View, Text, Image, FlatList } from "react-native";
+
+import { addChat, getChatId, getUserById } from "../../utils/functions";
+import { View, Text, Button, FlatList, Image} from "react-native";
+
+
 import ProfileData from "../../components/ProfilePage/ProfileData";
 import FormButtons from "../../components/ProfilePage/FormButtons";
 import {
@@ -15,6 +18,7 @@ import MiniRepoList from "../../components/MiniLists/MiniRepoList";
 
 const DevProfile = ({ navigation, route }) => {
   const { data } = route.params;
+  const {user} = useContext(UserContext)
   const [colab, setColab] = useState([]);
   const [state, setState] = useState(1);
   const [portfolio, setPortfolio] = useState([]);
@@ -24,6 +28,11 @@ const DevProfile = ({ navigation, route }) => {
   useEffect(() => {
     getProjectById(data.item.id).then((data) => setColab(data));
   }, []);
+
+  function handlePress() {
+    addChat(null, user.id, data.item.id)
+      .then(id => navigation.navigate('Messages', { screen: 'Direct message', initial:false, params: { id } }))
+  }
 
 
   const [lang, setLang] = useState([]);
@@ -35,12 +44,7 @@ const DevProfile = ({ navigation, route }) => {
     getLangArray();
   }, []);
   
-    function handlePress() {
-    // function to chatId by username and participant
-    // or if doesnt exist create the chat
-    // then handle navigation to the dm page with the prop of chatid
-    navigation.navigate('Messages', { screen: 'Direct message', params: { data}})
-}
+
 
 
   console.log(data.item);
@@ -70,6 +74,7 @@ const DevProfile = ({ navigation, route }) => {
             </View>
           </View>
         </View>
+        <Button title='message' onPress={handlePress}/>
         <View className="ml-3 my-5">
           <Text className="text-2xl font-semibold ">{data.item.username}</Text>
           <Text className="text-normal mt-1">{data.item.bio}</Text>
