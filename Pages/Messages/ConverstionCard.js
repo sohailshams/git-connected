@@ -11,13 +11,16 @@ const ConversationCard = ({ data, navigation, newMsgSenders, setNewMsgSenders })
   
   let msg;
   let time;
+  let sender
   
   if(keys.indexOf('last_message') === -1){
     msg = ''
     time = ''
+    sender=''
   } else {
     msg = data.item.last_message.msg_content
-    time= data.item.last_message.display_date
+    time = data.item.last_message.display_date
+    sender = data.item.last_message.sender.username
   }
   
   function handlePress() {
@@ -46,7 +49,7 @@ const ConversationCard = ({ data, navigation, newMsgSenders, setNewMsgSenders })
             <Text
               className={`max-w-[500px] max-h-[60px] p-2 m-3 rounded-md shadow-lg truncate   ${
                 data.item.chat.chat_name ===
-                data.item.last_message.sender.username
+                sender
                   ? 'bg-gray-300 justify-start'
                   : 'bg-lime-400 justify-end'
               }`}
@@ -55,7 +58,7 @@ const ConversationCard = ({ data, navigation, newMsgSenders, setNewMsgSenders })
             </Text>
             </View>
             <Text className="justify-right text-xs">
-              {data.item.last_message.sender.username}, {time}
+              {sender}, {time}
             </Text>
           </View>
         </View>
