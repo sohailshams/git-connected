@@ -13,7 +13,7 @@ import { UserContext } from "../../contexts/User";
 
 const DevCard = ({ data, navigation }) => {
   const [lang, setLang] = useState([]);
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const getLangArray = async () => {
@@ -25,24 +25,23 @@ const DevCard = ({ data, navigation }) => {
 
   function handlePress() {
     if (user.username !== data.item.username) {
-      navigation.navigate("Dev Profile", { data })}
-  else {
-    navigation.navigate('Profile')
+      navigation.navigate("Dev Profile", { data });
+    } else {
+      navigation.navigate("Profile");
     }
   }
 
   return (
     <TouchableOpacity
     className="my-3"
-      onPress={handlePress}
+      onPress={() => navigation.navigate("Dev Profile", { data })}
     >
-      <View className="max-[320px]:justify-center bg-gray-100 border-[1px] border-black  flex flex-row max-[320px]:w-[280px] shadow-2xl m-2 p-3 items-center mx-auto min-[375px]-w-[315px] rounded-tl-[5%] rounded-br-[5%] rounded-tr-[20%] rounded-bl-[20%]">
+      <View className="max-[320px]:justify-center bg-gray-200 border-[0px] border-black  flex flex-row max-[320px]:w-[280px] shadow-lg m-2 p-3 items-center mx-auto min-[375px]-w-[315px] rounded-tl-[5%] rounded-br-[5%] rounded-tr-[5%] rounded-bl-[5%]">
         <View className="flex min-[375px]:flex-row max-[320px]:flex-cols-1 items-center">
           <Image
             className="h-[80px] w-[80px] max-[320px]:h-[50px] max-[320px]:w-[50px] rounded-full"
             source={data.item.avatar_url}
           />
-
           <View className="pl-3">
             <Text className="font-bold">{data.item.username}</Text>
             <Text className="font-semibold">{data.item.location}</Text>

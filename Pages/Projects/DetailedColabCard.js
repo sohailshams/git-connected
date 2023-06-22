@@ -51,12 +51,12 @@ const DetailedColabCard = ({ route, navigation }) => {
         <TouchableOpacity
           onPress={() => Linking.openURL(`${data.item.html_url}`)}
         >
-          <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold">
+          <Text className="bg-lime-400 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold">
             GitHub
           </Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold" onPress={handlePress}>
+          <Text className="bg-lime-400 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold" onPress={handlePress}>
             Collaborate
           </Text>
         </TouchableOpacity>
