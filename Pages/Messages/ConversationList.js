@@ -3,7 +3,7 @@ import { getMessageList } from "../../utils/functions"
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../contexts/User"
 import ConversationCard from "./ConverstionCard"
-import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase.config"
 
 const ConversationList = ({ navigation }) => {
@@ -12,10 +12,7 @@ const ConversationList = ({ navigation }) => {
   const [data, setData] = useState([])
 
   useEffect(()=>{
-    const q = query(
-      collection(db, "users", `${user.username}`, "conversations"),
-      orderBy("last_message.msg_date_sent", "desc")
-    );
+    const q = query(collection(db, "users", `${user.username}`, 'conversations'),);
     onSnapshot(q, (querySnapshot) => {
       const chatList = [];
       console.log('listen')
