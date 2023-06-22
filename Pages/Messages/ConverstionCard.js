@@ -24,9 +24,9 @@ const ConversationCard = ({ data, navigation }) => {
 
   return (
     <TouchableOpacity onPress={handlePress}>
-      <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg m-3">
-        <View className="min-[768px]:relative max-[425px]:flex-cols-1 flex min-[768px]:flex-row justify-between items-center m-3">
-          <View className=" w-[150px] h-[150px] bg-gray-300 mx-auto rounded-md shadow-lg mt-3 mb-3  text-left ml-3 items-center">
+      <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
+        <View className="min-[768px]:relative max-[425px]:flex-cols-1 flex min-[768px]:flex-row justify-between items-start m-3">
+          <View className="w-[150px] h-[150px] bg-gray-300 mx-auto rounded-md shadow-lg mt-3 mb-3  text-left ml-3 items-center">
             <Text className="text-xl font-semibold m-3">{otherUsers}</Text>
             <Image
               className="rounded-full mt-3 h-[80px] w-[80px] mb-3"
@@ -34,22 +34,24 @@ const ConversationCard = ({ data, navigation }) => {
               style={{ height: 50, width: 50 }}
             />
           </View>
-          <View className="flex flex-cols-1 items-center">
-            <View className="  max-w-[500px] p-2 m-3 rounded-md shadow-lg text-md m-3 bg-black text-white ">
-              <Text className="text-white mr-0">
+          <View className="flex flex-cols-1 items-end">
+            <View className=" max-w-[500px] p-2 m-3 rounded-md shadow-lg text-md m-3 bg-black text-white ">
+              <Text className="bg-black py-2 px-3 rounded-md text-white">
                 Latest message from {data.item.last_message.sender.username}
               </Text>
             </View>
+            <View className=''>
             <Text
-              className={`max-w-[500px] p-2 m-3 rounded-md shadow-lg   ${
+              className={`max-w-[500px] max-h-[60px] p-2 m-3 rounded-md shadow-lg truncate   ${
                 data.item.chat.chat_name ===
                 data.item.last_message.sender.username
-                  ? 'bg-lime-400 justify-start'
-                  : 'bg-gray-300 justify-end'
+                  ? 'bg-gray-300 justify-start'
+                  : 'bg-lime-400 justify-end'
               }`}
             >
               {sender}
             </Text>
+            </View>
             <Text className="justify-right text-xs">
               {data.item.last_message.sender.username}, {time}
             </Text>
