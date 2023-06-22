@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { UserProvider } from "./contexts/User";
 import Nav from "./navigators/Nav";
 import { NativeWindStyleSheet } from "nativewind";
-    
+
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
@@ -15,4 +15,3 @@ export default function App() {
     </UserProvider>
   );
 }
-
