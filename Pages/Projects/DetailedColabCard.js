@@ -1,17 +1,25 @@
-import { View, Text, TouchableOpacity, Linking, Image } from 'react-native';
-import { useContext, useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Linking, Image } from "react-native";
+import { useContext, useEffect, useState } from "react";
 
-import { getUserById } from '../../utils/functions';
+import { getUserById } from "../../utils/functions";
 
-import React from 'react';
+import React from "react";
+import { UserContext } from "../../contexts/User";
+import { addChat } from "../../utils/functions";
 
-const DetailedColabCard = ({ route }) => {
-  const { data } = route.params;
-  const [userData, setUserData] = useState('');
-
-  useEffect(() => {
-    getUserById(data.item.userId).then((userData) => setUserData(userData));
-  }, []);
+const DetailedColabCard = ({ route, navigation }) => {
+  const { data, userData } = route.params;
+  const {user} = useContext(UserContext)
+  
+  function handlePress() {
+    addChat(null, user.id, data.item.userId).then((id) =>
+      navigation.navigate("Messages", {
+        screen: "Direct message",
+        initial: false,
+        params: { id },
+      })
+    );
+  }
 
   return (
     <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
@@ -40,16 +48,15 @@ const DetailedColabCard = ({ route }) => {
         </View>
       </View>
       <View className="flex flex-row justify-between w-[125px]">
-        <TouchableOpacity>
-          <Text
-            className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold"
-            onPress={() => Linking.openURL(`${data.item.html_url}`)}
-          >
+        <TouchableOpacity
+          onPress={() => Linking.openURL(`${data.item.html_url}`)}
+        >
+          <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold">
             GitHub
           </Text>
-        </TouchableOpacity>{' '}
+        </TouchableOpacity>
         <TouchableOpacity>
-          <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold">
+          <Text className="bg-lime-700 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1 m-3 text-white font-semibold" onPress={handlePress}>
             Collaborate
           </Text>
         </TouchableOpacity>

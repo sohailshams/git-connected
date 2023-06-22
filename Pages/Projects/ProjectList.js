@@ -1,3 +1,4 @@
+
 import { collection, getDocs, query } from 'firebase/firestore';
 import { View, Text, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
@@ -10,19 +11,20 @@ const ProjectList = ({ navigation }) => {
   const [animationVisible, setAnimationVisible] = useState(true);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      const q = query(collection(db, 'repos', 'type', 'collaboration'));
+    
+      const q = query(collection(db, "repos", "type", "collaboration"));
+      onSnapshot(q, (querySnapshot) => {
       const projArray = [];
-      const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => projArray.push(doc.data()));
       setProjectList(projArray);
-    };
+    })
+    
 
-    fetchProjects();
   }, []);
 
   const renderProjectItem = (item) => {
     return <ColabCard data={item} navigation={navigation} />;
+
   };
 
   const onAnimationComplete = () => {
@@ -35,9 +37,12 @@ const ProjectList = ({ navigation }) => {
         <OpeningAnimation onAnimationComplete={onAnimationComplete} />
       )}
       {!animationVisible && (
-        <FlatList data={projectList} renderItem={renderProjectItem} />
+        <ScrollView className="my-3">
+      <FlatList data={projectList} renderItem={renderProjectItem} />
+    </ScrollView>
       )}
     </View>
+
   );
 };
 

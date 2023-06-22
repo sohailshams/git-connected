@@ -197,28 +197,45 @@ export const getUserDataById = async (uid, key) => {
   return key ? usersData[key] : usersData;
 };
 
+export const getChatId = async (userid, otherUserId) => {
+  const data = await getUserById(userid)
+  const otherUser = await getUserById(otherUserId)
+  console.log(otherUser.username)
+  const q = query(
+    collection(db, "users", data.username, "conversations"),
+    where(`members.${otherUser.username}.is_active`, "==", true)
+  );
+  const docArray = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => docArray.push(doc.id));
+  return docArray[0]
+}
 // onPress - devcard?, devprofile
 // add chatname somewhere else
 export const addChat = async (addedChatName, userId, ...otherMembersIds) => {
-  const members = [...otherMembersIds]
-  members.push(userId)
-  const memberData = await Promise.all(members.map(async userId => {
-    const username = await getUserDataById(userId, 'username')
-    const avatarUrl = await getUserDataById(userId, 'avatar_url')
+
+  const id = await getChatId(userId, otherMembersIds)
+  console.log(id)
+  if (!id) {
+    const members = [...otherMembersIds]
+    members.push(userId)
+    const memberData = await Promise.all(members.map(async userId => {
+      const username = await getUserDataById(userId, 'username')
+      const avatarUrl = await getUserDataById(userId, 'avatar_url')
     
-    return [[username], {
-      user_id: userId,
-      username,
-      avatar_url: avatarUrl,
-      is_active: true /* to be dynamic */
-    }]
-  }))
-  const docMemberData = {'members': Object.fromEntries(memberData)}
-  const usernames = Object.keys(docMemberData.members)
-  const chatUID = usernames.join(', '); // option to rename the chat
+      return [[username], {
+        user_id: userId,
+        username,
+        avatar_url: avatarUrl,
+        is_active: true /* to be dynamic */
+      }]
+    }))
+    const docMemberData = { 'members': Object.fromEntries(memberData) }
+    const usernames = Object.keys(docMemberData.members)
+    const chatUID = usernames.join(', '); // option to rename the chat
   
   
-  usernames.forEach(async username => {
+    usernames.forEach(async username => {
       const chatName = await addedChatName ? addedChatName : otherMembersIds.length === 1 ? usernames[usernames.findIndex(user => user !== username)] : chatUID
       const docChatData = {
         'members': docMemberData.members,
@@ -227,16 +244,19 @@ export const addChat = async (addedChatName, userId, ...otherMembersIds) => {
           chat_id: chatUID
         }
       }
-    const docFields = setDoc(doc(collection(db, "users", username, "conversations"), `${chatUID}`), docChatData);
-  })
+      const docFields = setDoc(doc(collection(db, "users", username, "conversations"), `${chatUID}`), docChatData);
+    })
+    return chatUID
+  } else {
+    console.log('in else block')
+    return id
+  }
 }
 
 export const getChatDataByUserId = async (userId, chatId) => {
   const username = await getUserDataById(userId, 'username')
 
-  const q = query(
-    collection(db, "users", username, 'conversations'),
-  );
+  const q = query(collection(db, "users", username, "conversations"));
   const chatArr = [];
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach(async doc => chatArr.push(doc.data()));

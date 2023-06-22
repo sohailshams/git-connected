@@ -35,14 +35,22 @@ const Nav = () => {
             options={{ headerShown: false }}
           />
           <Tab.Screen
-            name="account"
+            name="Profile"
             component={ProfileNavigator}
             options={{ headerShown: false }}
           />
         </Tab.Navigator>
       ) : (
-        <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
-          <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Navigator
+          screenOptions={{
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: "rgb(113, 113, 122)",
+              height: 50,
+            },
+          }}
+        >
+          <Stack.Screen name="Sign In" component={SignIn} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

@@ -7,6 +7,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
@@ -106,7 +107,7 @@ const Profile = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
+      <ScrollView className="w-5/6 bg-white mx-auto rounded-md shadow-lg my-3">
         <FormButtons
           title1="Showcase List"
           title2="Collaboration List"
@@ -118,7 +119,7 @@ const Profile = ({ navigation }) => {
         ) : (
           <MiniColabList project={colab} navigation={navigation} />
         )}
-      </View>
+      </ScrollView>
     </>
   );
 };
