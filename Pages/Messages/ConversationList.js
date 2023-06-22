@@ -8,7 +8,7 @@ import { db } from "../../firebase.config"
 
 const ConversationList = ({ navigation }) => {
   const { user } = useContext(UserContext)
-  const [ newMsgSender, setNewMsgSender ] = useState('')
+  const [ newMsgSenders, setNewMsgSenders ] = useState([])
   const [data, setData] = useState([])
 
   useEffect(()=>{
@@ -18,7 +18,7 @@ const ConversationList = ({ navigation }) => {
       console.log('listen')
       querySnapshot.docChanges().forEach(change => {
         if (change.type === 'modified') {
-          setNewMsgSender(change.doc.data().last_message.sender.username)
+          setNewMsgSenders(currMsgs => [...currMsgs, change.doc.data().last_message.sender.username])
         }
       })
       querySnapshot.forEach((doc) => chatList.push(doc.data()));
@@ -27,9 +27,9 @@ const ConversationList = ({ navigation }) => {
   }, [])
   
   const renderItem = (item) => {
-      return <ConversationCard data={item} navigation={navigation} newMsgSender={newMsgSender} />;
+      return <ConversationCard data={item} navigation={navigation} newMsgSenders={newMsgSenders} setNewMsgSenders={setNewMsgSenders} />;
   };
-  
+
   return (
     <ScrollView>
       <View>
