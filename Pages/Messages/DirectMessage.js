@@ -38,7 +38,7 @@ const DirectMessage = ({ route, navigation }) => {
   };
   return (
     <ScrollView>
-      <View className="h-[500px] w-5/6 max-[768px]:w-[100%] bg-white mx-auto rounded-md shadow-lg my-3">
+      <View className="h-[500px] w-5/6 max-[768px]:w-[90%] bg-white mx-auto rounded-md shadow-lg my-3">
         <FlatList
           data={msgList.reverse()}
           renderItem={renderItem}

@@ -21,9 +21,9 @@ const MsgCard = ({ data }) => {
           className="h-[50px] w-[50px] rounded-full"
         />
         <View className="w-4/5">
-          <View className="flex flex-row">
+          <View className="flex min-[375px]:flex-row max-[320px]:flex-cols-1">
             <Text className="font-semibold">{sender}</Text>
-            <Text className="pl-3 text-slate-500">{time}</Text>
+            <Text className="px-3 max-[320px]:px-0 text-slate-500">{time}</Text>
           </View>
           <Text className="my-2 pr-3">{data.item.msg_content}</Text>
         </View>
