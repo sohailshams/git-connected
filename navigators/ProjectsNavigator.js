@@ -16,7 +16,7 @@ const ProjectsNavigator = () => {
       }}
     >
       <Stack.Screen name="Browse Projects" component={ProjectList} />
-      <Stack.Screen name="Detailed Colab Card" component={DetailedColabCard} />
+      <Stack.Screen name="Project Detail" component={DetailedColabCard} />
     </Stack.Navigator>
   );
 };
