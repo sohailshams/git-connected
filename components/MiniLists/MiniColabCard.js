@@ -8,7 +8,7 @@ const MiniColabCard = ({ data, navigation }) => {
   useEffect(() => { getUserById(data.userId).then(data => setUser(data)) }, [])
   function handlePress() {
     navigation.navigate("Projects", {
-      screen: "Detailed Colab Card", initial:false,
+      screen: "Project Detail", initial:false,
       params: { data: { item: data }, userData: user },
     });
   }
