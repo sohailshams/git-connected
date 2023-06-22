@@ -16,7 +16,6 @@ const DevProfileNavigator = () => {
     }}>
       <Stack.Screen name="Find a Collaborator" component={DevList} />
       <Stack.Screen name="devList" component={DevList} />
-      {/* <Stack.Screen name="dev card" component={DevCard} /> */}
       <Stack.Screen name="Dev Profile" component={DevProfile} />
       
     

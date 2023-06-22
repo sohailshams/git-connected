@@ -1,26 +1,30 @@
 import { useContext } from 'react';
 import { TouchableOpacity, Text, View, Image } from 'react-native';
 import { UserContext } from '../../contexts/User';
-const ConversationCard = ({ data, navigation }) => {
+
+const ConversationCard = ({ data, navigation, newMsgSenders, setNewMsgSenders }) => {
   const { user } = useContext(UserContext);
   const users = Object.keys(data.item.members);
   const otherUsers = users.filter((name) => name !== user.username);
   const keys = Object.keys(data.item);
-  let sender;
+  const newMsgsCount = newMsgSenders.filter(user => user === otherUsers[0]).length
+  
+  let msg;
   let time;
-  if (keys.indexOf('last_message') === -1) {
-    sender = '';
-    time = '';
+  
+  if(keys.indexOf('last_message') === -1){
+    msg = ''
+    time = ''
   } else {
-    sender = data.item.last_message.msg_content;
-    time = data.item.last_message.display_date;
+    msg = data.item.last_message.msg_content
+    time= data.item.last_message.display_date
+  }
+  
+  function handlePress() {
+    setNewMsgSenders(currMsgs => [...currMsgs].filter(user => user !== otherUsers[0]))
+    navigation.navigate('Direct message', {id:data.item.chat.chat_id})
   }
 
-  function handlePress() {
-    navigation.navigate('Direct message', { id: data.item.chat.chat_id });
-  }
-  console.log('inbox of:', data.item.chat.chat_name);
-  // data.item.last_message.sender.username
 
   return (
     <TouchableOpacity onPress={handlePress}>
@@ -36,9 +40,7 @@ const ConversationCard = ({ data, navigation }) => {
           </View>
           <View className="flex flex-cols-1 items-end">
             <View className=" max-w-[500px] p-2 m-3 rounded-md shadow-lg text-md m-3 bg-black text-white ">
-              <Text className="bg-black py-2 px-3 rounded-md text-white">
-                Latest message from {data.item.last_message.sender.username}
-              </Text>
+               {newMsgSenders.includes(otherUsers[0]) ? <Text className="bg-black py-2 px-3 rounded-md text-white">{newMsgsCount} new messages</Text> : null }
             </View>
             <View className=''>
             <Text
@@ -49,7 +51,7 @@ const ConversationCard = ({ data, navigation }) => {
                   : 'bg-lime-400 justify-end'
               }`}
             >
-              {sender}
+              {msg}
             </Text>
             </View>
             <Text className="justify-right text-xs">

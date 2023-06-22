@@ -2,8 +2,7 @@ import { UserContext } from "../../contexts/User";
 import { useState, useEffect, useContext } from "react";
 
 import { addChat, getChatId, getUserById } from "../../utils/functions";
-import { View, Text, Button, FlatList, Image} from "react-native";
-
+import { View, Text, Button, FlatList, Image } from "react-native";
 
 import ProfileData from "../../components/ProfilePage/ProfileData";
 import FormButtons from "../../components/ProfilePage/FormButtons";
@@ -15,10 +14,11 @@ import {
 } from "../../utils/functions";
 import MiniColabList from "../../components/MiniLists/MiniColabList";
 import MiniRepoList from "../../components/MiniLists/MiniRepoList";
+import { TouchableOpacity } from "react-native-web";
 
 const DevProfile = ({ navigation, route }) => {
   const { data } = route.params;
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
   const [colab, setColab] = useState([]);
   const [state, setState] = useState(1);
   const [portfolio, setPortfolio] = useState([]);
@@ -30,10 +30,14 @@ const DevProfile = ({ navigation, route }) => {
   }, []);
 
   function handlePress() {
-    addChat(null, user.id, data.item.id)
-      .then(id => navigation.navigate('Messages', { screen: 'Direct message', initial:false, params: { id } }))
+    addChat(null, user.id, data.item.id).then((id) =>
+      navigation.navigate("Messages", {
+        screen: "Direct message",
+        initial: false,
+        params: { id },
+      })
+    );
   }
-
 
   const [lang, setLang] = useState([]);
   useEffect(() => {
@@ -43,9 +47,6 @@ const DevProfile = ({ navigation, route }) => {
     };
     getLangArray();
   }, []);
-  
-
-
 
   console.log(data.item);
   return (
@@ -74,7 +75,15 @@ const DevProfile = ({ navigation, route }) => {
             </View>
           </View>
         </View>
-        <Button title='message' onPress={handlePress}/>
+        <View className="ml-3 my-5">
+        <TouchableOpacity
+          className="bg-zinc-500 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1"
+          title="message"
+          onPress={handlePress}
+        >
+          <Text className="text-white">Message Developer</Text>
+          </TouchableOpacity>
+          </View>
         <View className="ml-3 my-5">
           <Text className="text-2xl font-semibold ">{data.item.username}</Text>
           <Text className="text-normal mt-1">{data.item.bio}</Text>
@@ -94,7 +103,6 @@ const DevProfile = ({ navigation, route }) => {
           <MiniColabList project={colab} navigation={navigation} />
         )}
       </View>
-
     </View>
   );
 };
