@@ -2,7 +2,7 @@ import { UserContext } from "../../contexts/User";
 import { useState, useEffect, useContext } from "react";
 
 import { addChat, getChatId, getUserById } from "../../utils/functions";
-import { View, Text, Button, FlatList, Image } from "react-native";
+import { View, Text, Button, FlatList, Image, ScrollView } from "react-native";
 
 import ProfileData from "../../components/ProfilePage/ProfileData";
 import FormButtons from "../../components/ProfilePage/FormButtons";
@@ -50,7 +50,7 @@ const DevProfile = ({ navigation, route }) => {
 
   console.log(data.item);
   return (
-    <View>
+    <ScrollView className="mb-3">
       <View className="w-5/6 bg-white mx-auto rounded-md shadow-lg mt-3">
         <View className="flex flex-row max-[375px]:flex-col pl-3  mt-3">
           <Image
@@ -76,14 +76,14 @@ const DevProfile = ({ navigation, route }) => {
           </View>
         </View>
         <View className="ml-3 my-5">
-        <TouchableOpacity
-          className="bg-zinc-500 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1"
-          title="message"
-          onPress={handlePress}
-        >
-          <Text className="text-white">Message Developer</Text>
+          <TouchableOpacity
+            className="bg-zinc-500 shadow-2xl py-1 px-2 w-[100px] rounded-full text-center my-1"
+            title="message"
+            onPress={handlePress}
+          >
+            <Text className="text-white">Message Developer</Text>
           </TouchableOpacity>
-          </View>
+        </View>
         <View className="ml-3 my-5">
           <Text className="text-2xl font-semibold ">{data.item.username}</Text>
           <Text className="text-normal mt-1">{data.item.bio}</Text>
@@ -103,7 +103,7 @@ const DevProfile = ({ navigation, route }) => {
           <MiniColabList project={colab} navigation={navigation} />
         )}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
