@@ -48,7 +48,7 @@ const ConversationCard = ({ data, navigation, newMsgSenders, setNewMsgSenders })
             <View className=''>
             <Text
               className={`max-w-[500px] max-h-[60px] p-2 m-3 rounded-md shadow-lg truncate   ${
-                data.item.chat.chat_name ===
+                user.username !==
                 sender
                   ? 'bg-gray-300 justify-start'
                   : 'bg-lime-400 justify-end'
