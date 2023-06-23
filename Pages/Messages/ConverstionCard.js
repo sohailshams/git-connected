@@ -11,15 +11,18 @@ const ConversationCard = ({ data, navigation, newMsgSenders, setNewMsgSenders })
   
   let msg;
   let time;
-  let sender
+  let sender;
+  let date;
   
   if(keys.indexOf('last_message') === -1){
     msg = ''
     time = ''
+    date = ''
     sender=''
   } else {
     msg = data.item.last_message.msg_content
-    time = data.item.last_message.display_date
+    time = data.item.last_message.display_time;
+    date = data.item.last_message.display_date;
     sender = data.item.last_message.sender.username
   }
   
@@ -61,7 +64,7 @@ const ConversationCard = ({ data, navigation, newMsgSenders, setNewMsgSenders })
               </Text>
             </View>
             <Text className="justify-right text-xs">
-              {sender}, {time}
+              {sender === user.username ? 'you' : sender}, {`${date} ${time}`}
             </Text>
           </View>
         </View>
